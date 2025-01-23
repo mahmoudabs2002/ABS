@@ -1,0 +1,478 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    font-family: "Open Sans", sans-serif;
+}
+
+.numContain:hover .number {
+    border-color: #fe5008;
+}
+
+.box:hover img {
+    scale: 1.05;
+    transition: 0.3s;
+} 
+.box:hover {
+    border-color:#fe5008 ;
+    cursor: pointer;
+}
+
+.heading1 {
+    animation-name: horizontal-shaking1;
+    animation-duration: 1s;
+    /* animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); */
+    animation-direction: alternate;
+}
+.heading2 {
+    animation-name: horizontal-shaking2;
+    animation-duration: 1s;
+    /* animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); */
+    animation-direction: alternate;
+}
+.heading3 {
+    animation-name: horizontal-shaking3;
+    animation-duration: 1s;
+    /* animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); */
+    animation-direction: alternate;
+}
+.heading4 {
+    animation-name: horizontal-shaking4;
+    animation-duration: 1s;
+    /* animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); */
+    animation-direction: alternate;
+}
+.heading5 {
+    animation-name: horizontal-shaking5;
+    animation-duration: 1s;
+    /* animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); */
+    animation-direction: alternate;
+}
+.heading6 {
+    animation-name: horizontal-shaking6;
+    animation-duration: 1s;
+    /* animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); */
+    animation-direction: alternate;
+}
+.heading7 {
+    animation-name: horizontal-shaking7;
+    animation-duration: 1s;
+    /* animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); */
+    animation-direction: alternate;
+}
+@keyframes horizontal-shaking1 {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(15px) }
+    50% { transform: translateX(-15px) }
+    75% { transform: translateX(15px) }
+    100% { transform: translateX(0) }
+   }
+   @keyframes horizontal-shaking2 {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(15px) }
+    50% { transform: translateX(-15px) }
+    75% { transform: translateX(15px) }
+    100% { transform: translateX(0) }
+   }
+   @keyframes horizontal-shaking3 {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(15px) }
+    50% { transform: translateX(-15px) }
+    75% { transform: translateX(15px) }
+    100% { transform: translateX(0) }
+   }
+   @keyframes horizontal-shaking4 {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(15px) }
+    50% { transform: translateX(-15px) }
+    75% { transform: translateX(15px) }
+    100% { transform: translateX(0) }
+   }
+   @keyframes horizontal-shaking5 {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(15px) }
+    50% { transform: translateX(-15px) }
+    75% { transform: translateX(15px) }
+    100% { transform: translateX(0) }
+   }
+   @keyframes horizontal-shaking6 {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(15px) }
+    50% { transform: translateX(-15px) }
+    75% { transform: translateX(15px) }
+    100% { transform: translateX(0) }
+   }
+   @keyframes horizontal-shaking7 {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(15px) }
+    50% { transform: translateX(-15px) }
+    75% { transform: translateX(15px) }
+    100% { transform: translateX(0) }
+   }
+
+ /* .slide {
+    animation-name: slide1;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+} 
+.slide2 {
+    animation-name: slide2;
+    animation-duration: 4s;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}  */
+
+.slider1 {
+    animation-name: slide1;
+    animation-duration: 1s;
+}
+
+.slider2 {
+    animation-name: slide2;
+    animation-duration: 1s;
+}
+
+.slider3 {
+    animation-name: slide3;
+    animation-duration: 1s;
+}
+
+.slider4 {
+    animation-name: slide4;
+    animation-duration: 1s;
+}
+
+.slider5 {
+    animation-name: slide5;
+    animation-duration: 1s;
+}
+
+.slider6 {
+    animation-name: slide6;
+    animation-duration: 1s;
+}
+
+.slider7 {
+    animation-name: slide7;
+    animation-duration: 1s;
+}
+
+@keyframes slide1 {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(25px) }
+    50% { transform: translateX(-25px) }
+    75% { transform: translateX(25px) }
+    100% { transform: translateX(0) }
+}
+@keyframes slide2 {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(25px) }
+    50% { transform: translateX(-25px) }
+    75% { transform: translateX(25px) }
+    100% { transform: translateX(0) }
+}
+@keyframes slide3 {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(25px) }
+    50% { transform: translateX(-25px) }
+    75% { transform: translateX(25px) }
+    100% { transform: translateX(0) }
+}
+@keyframes slide4 {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(25px) }
+    50% { transform: translateX(-25px) }
+    75% { transform: translateX(25px) }
+    100% { transform: translateX(0) }
+}
+@keyframes slide5 {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(25px) }
+    50% { transform: translateX(-25px) }
+    75% { transform: translateX(25px) }
+    100% { transform: translateX(0) }
+}
+@keyframes slide6 {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(25px) }
+    50% { transform: translateX(-25px) }
+    75% { transform: translateX(25px) }
+    100% { transform: translateX(0) }
+}
+@keyframes slide7 {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(25px) }
+    50% { transform: translateX(-25px) }
+    75% { transform: translateX(25px) }
+    100% { transform: translateX(0) }
+}
+.carousel {
+    margin: auto;
+    width: 100%;
+    height: 80vmin;
+    margin-top: -80px;
+    margin-bottom: -80px;
+    position: relative;
+  }
+  .carousel:before, .carousel:after {
+    position: absolute;
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    width: 100%;
+  }
+  .carousel__stage {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .carousel__item-input {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  .carousel__item-input:nth-child(1):checked ~ .item-1 {
+    transform: translate(0%);
+  }
+  .carousel__item-input:nth-child(1):checked ~ .item-2 {
+    transform: translate(100%);
+  }
+  .carousel__item-input:nth-child(1):checked ~ .item-3 {
+    transform: translate(200%);
+  }
+  .carousel__item-input:nth-child(1):checked ~ .item-4 {
+    transform: translate(300%);
+  }
+  .carousel__item-input:nth-child(1):checked ~ .item-5 {
+    transform: translate(400%);
+  }
+  .carousel__item-input:nth-child(1):checked ~ .item-6 {
+    transform: translate(500%);
+  }
+  .carousel__item-input:nth-child(1):checked ~ .item-7 {
+    transform: translate(600%);
+  }
+  .carousel__item-input:nth-child(2):checked ~ .item-1 {
+    transform: translate(-100%);
+  }
+  .carousel__item-input:nth-child(2):checked ~ .item-2 {
+    transform: translate(0%);
+  }
+  .carousel__item-input:nth-child(2):checked ~ .item-3 {
+    transform: translate(100%);
+  }
+  .carousel__item-input:nth-child(2):checked ~ .item-4 {
+    transform: translate(200%);
+  }
+  .carousel__item-input:nth-child(2):checked ~ .item-5 {
+    transform: translate(300%);
+  }
+  .carousel__item-input:nth-child(2):checked ~ .item-6{
+    transform: translate(400%);
+  }
+  .carousel__item-input:nth-child(2):checked ~ .item-7 {
+    transform: translate(500%);
+  }
+  .carousel__item-input:nth-child(3):checked ~ .item-1 {
+    transform: translate(-200%);
+  }
+  .carousel__item-input:nth-child(3):checked ~ .item-2 {
+    transform: translate(-100%);
+  }
+  .carousel__item-input:nth-child(3):checked ~ .item-3 {
+    transform: translate(0%);
+  }
+  .carousel__item-input:nth-child(3):checked ~ .item-4 {
+    transform: translate(100%);
+  }
+  .carousel__item-input:nth-child(3):checked ~ .item-5 {
+    transform: translate(200%);
+  }
+  .carousel__item-input:nth-child(3):checked ~ .item-6 {
+    transform: translate(300%);
+  }
+  .carousel__item-input:nth-child(3):checked ~ .item-7 {
+    transform: translate(400%);
+  }
+  .carousel__item-input:nth-child(4):checked ~ .item-1 {
+    transform: translate(-300%);
+  }
+  .carousel__item-input:nth-child(4):checked ~ .item-2 {
+    transform: translate(-200%);
+  }
+  .carousel__item-input:nth-child(4):checked ~ .item-3 {
+    transform: translate(-100%);
+  }
+  .carousel__item-input:nth-child(4):checked ~ .item-4 {
+    transform: translate(0%);
+  }
+  .carousel__item-input:nth-child(4):checked ~ .item-5 {
+    transform: translate(100%);
+  }
+  .carousel__item-input:nth-child(4):checked ~ .item-6 {
+    transform: translate(200%);
+  }
+  .carousel__item-input:nth-child(4):checked ~ .item-7 {
+    transform: translate(300%);
+  }
+  .carousel__item-input:nth-child(5):checked ~ .item-1 {
+    transform: translate(-400%);
+  }
+  .carousel__item-input:nth-child(5):checked ~ .item-2 {
+    transform: translate(-300%);
+  }
+  .carousel__item-input:nth-child(5):checked ~ .item-3 {
+    transform: translate(-200%);
+  }
+  .carousel__item-input:nth-child(5):checked ~ .item-4 {
+    transform: translate(-100%);
+  }
+  .carousel__item-input:nth-child(5):checked ~ .item-5 {
+    transform: translate(0%);
+  }
+  .carousel__item-input:nth-child(5):checked ~ .item-6 {
+    transform: translate(100%);
+  }
+  .carousel__item-input:nth-child(5):checked ~ .item-7 {
+    transform: translate(200%);
+  }
+  .carousel__item-input:nth-child(6):checked ~ .item-1 {
+    transform: translate(-500%);
+  }
+  .carousel__item-input:nth-child(6):checked ~ .item-2 {
+    transform: translate(-400%);
+  }
+  .carousel__item-input:nth-child(6):checked ~ .item-3 {
+    transform: translate(-300%);
+  }
+  .carousel__item-input:nth-child(6):checked ~ .item-4 {
+    transform: translate(-200%);
+  }
+  .carousel__item-input:nth-child(6):checked ~ .item-5 {
+    transform: translate(-100%);
+  }
+  .carousel__item-input:nth-child(6):checked ~ .item-6 {
+    transform: translate(0);
+  }
+  .carousel__item-input:nth-child(6):checked ~ .item-7 {
+    transform: translate(100%);
+  }
+  .carousel__item-input:nth-child(7):checked ~ .item-1 {
+    transform: translate(-600%);
+  }
+  .carousel__item-input:nth-child(7):checked ~ .item-2 {
+    transform: translate(-500%);
+  }
+  .carousel__item-input:nth-child(7):checked ~ .item-3 {
+    transform: translate(-400%);
+  }
+  .carousel__item-input:nth-child(7):checked ~ .item-4 {
+    transform: translate(-300%);
+  }
+  .carousel__item-input:nth-child(7):checked ~ .item-5 {
+    transform: translate(-200%);
+  }
+  .carousel__item-input:nth-child(7):checked ~ .item-6 {
+    transform: translate(-100%);
+  }
+  .carousel__item-input:nth-child(7):checked ~ .item-7 {
+    transform: translate(0);
+  }
+  .carousel__item-content {
+    box-sizing: border-box;
+    width: 100%;
+    height: 500px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.7s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    font-size: 16vmin;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    will-change: transform;
+  }
+  .carousel__item-content:nth-child(6) {
+    z-index: 7;
+    background: transparent;
+  }
+  .carousel__item-content:nth-child(7) {
+    z-index: 6;
+    background: transparent;
+  }
+  .carousel__item-content:nth-child(8) {
+    z-index: 5;
+    background: transparent;
+  }
+  .carousel__item-content:nth-child(9) {
+    z-index: 4;
+    background: transparent;
+  }
+  .carousel__item-content:nth-child(10) {
+    z-index: 3;
+    background: transparent;
+  }
+  .carousel__item-content:nth-child(11) {
+    z-index: 2;
+    background: transparent;
+  }
+  .carousel__item-content:nth-child(12) {
+    z-index: 1;
+    background: transparent;
+  }
+  @-webkit-keyframes blink {
+    0%, 100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 0.9;
+    }
+  }
+  
+  @keyframes blink {
+    0%, 100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 0.9;
+    }
+  }
+  @-webkit-keyframes ripple {
+    0%, 100% {
+      opacity: 0;
+    }
+    15% {
+      opacity: 0.6;
+    }
+    0% {
+      transform: scale(0);
+    }
+    100%, 85% {
+      transform: scale(5);
+    }
+  }
+  @keyframes ripple {
+    0%, 100% {
+      opacity: 0;
+    }
+    15% {
+      opacity: 0.6;
+    }
+    0% {
+      transform: scale(0);
+    }
+    100%, 85% {
+      transform: scale(5);
+    }
+  }
