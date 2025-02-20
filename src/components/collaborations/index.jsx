@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function Collaborations() {
   const [isOpen , setIsOpen] = useState(0)
   return (
-    <div className=" flex items-center lg:gap-52 gap-20  px-20 bg-secondary">
+    <div className=" flex items-center lg:gap-52 gap-20 px-20  lg:px-40 bg-secondary">
       <h3 className=" text-center -rotate-90 lg:w-20 lg:text-[80px] w-10 text-[50px] lg:leading-[150px] mt-80 text-white/10 font-bold  ">
         Development
         <pre> +Business</pre>

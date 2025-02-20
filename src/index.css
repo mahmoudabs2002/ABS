@@ -7,6 +7,16 @@ body {
     font-family: "Open Sans", sans-serif;
 }
 
+.p-sidebar-icons{
+ transform: translateY(50px);
+}
+.middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
 .numContain:hover .number {
     border-color: #fe5008;
 }
@@ -475,4 +485,12 @@ body {
     100%, 85% {
       transform: scale(5);
     }
+  }
+  .chat-forward{
+    transform: translateX(200px);
+    transition: transform 0.7s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  }
+  .chat-backward {
+    transform: translateX(-300px);
+    transition: transform 0.7s cubic-bezier(0.6, -0.28, 0.735, 0.045);
   }

@@ -8,12 +8,12 @@ export default function WorkedSection() {
             <img src="/mining_logo.png" alt=""          className="lg:w-36 lg:mx-16 mx-2 my-2" />
             <img src="/genz_logo.png" alt=""            className="lg:w-36 lg:mx-16 mx-2 my-2" />
             <img src="/masa_logo.png" alt=""            className="lg:w-36 lg:mx-16 mx-2 my-2"/>
-            <img src="/masa_logo.png" alt=""            className="lg:w-36 lg:mx-16 mx-2 my-2"/>
-            <img src="/masa_logo.png" alt=""            className="lg:w-36 lg:mx-16 mx-2 my-2"/>
-            <img src="/masa_logo.png" alt=""            className="lg:w-36 lg:mx-16 mx-2 my-2"/>
-            <img src="/masa_logo.png" alt=""            className="lg:w-36 lg:mx-16 mx-2 my-2"/>
-            <img src="/masa_logo.png" alt=""            className="lg:w-36 lg:mx-16 mx-2 my-2"/>
-
+            <img src="/Rectangle.png" alt=""            className="lg:w-36 lg:mx-16 mx-2 my-2"/>
+            <img src="/image 94.png" alt=""            className="lg:w-36 lg:mx-16 mx-2 my-2"/>
+            <img src="/Untitled-2[1] 1.png" alt=""            className="lg:w-36 lg:mx-16 mx-2 my-2"/>
+            <img src="/image 95 .png" alt=""            className="lg:w-36 lg:mx-16 mx-2 my-2"/>
+            <img src="/image 96.png" alt=""            className="lg:w-36 lg:mx-16 mx-2 my-2"/>
+            <img src="/Rectangle (1).png" alt=""            className="lg:w-36 lg:mx-16 mx-2 my-2"/>
         </div>
       </div>
     </div>

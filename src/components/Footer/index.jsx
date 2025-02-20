@@ -15,26 +15,26 @@ export default function Footer() {
   return (
     <>
       <div className=" bg-[#1B2125] py-10 px-20">
-        <div className=" flex flex-col md:flex-row items-center gap-28">
+        <div className=" flex flex-col md:flex-row gap-28">
           <img src="/footer_logo.png" alt="" className=" w-52" />
           <ul className=" text-white">
             <li className=" border-b w-[200px] mb-4 border-primary pb-4 text-white">
               Quick Links
             </li>
-            <li className=" mb-2 font-light w-[200px]">Products and Systems</li>
-            <li className=" mb-2 font-light">Our Projects</li>
-            <li className=" mb-2 font-light">Blogs</li>
-            <li className=" mb-2 font-light">R & D</li>
-            <li className=" mb-2 font-light">Courses</li>
-            <li className="font-light">ABSAI Camp</li>
+            <li className=" mb-2 font-light cursor-pointer w-[200px]">Products and Systems</li>
+            <li className=" mb-2 font-light cursor-pointer">Our Projects</li>
+            <li className=" mb-2 font-light cursor-pointer">Blogs</li>
+            <li className=" mb-2 font-light cursor-pointer">R & D</li>
+            <li className=" mb-2 font-light cursor-pointer">Courses</li>
+            <li className="font-light cursor-pointer">ABSAI Camp</li>
           </ul>
           <ul className=" text-white">
             <li className=" border-b w-[200px] mb-4 border-primary pb-4 text-white">
               Company
             </li>
-            <li className=" mb-2 font-light">About</li>
-            <li className=" mb-2 font-light">Pricing</li>
-            <li className="font-light">Join us</li>
+            <li className=" mb-2 font-light cursor-pointer">About</li>
+            <li className=" mb-2 font-light cursor-pointer">Pricing</li>
+            <li className="font-light cursor-pointer">Join us</li>
           </ul>
           <ul className=" text-white ml-32 md:ml-0">
             <li className=" border-b w-[200px] mb-4 border-primary pb-4 text-white">
@@ -80,10 +80,10 @@ export default function Footer() {
       <div className="bg-[#1B2125] mt-[-50px]">
       <div className=" border-t bg-[#1B2125] px-20 py-4 text-white font-thin border-white/20 mt-4">
         <div className=" flex justify-between">
-            <p>@{year} ABS.AI Technologies</p>
-            <div className=" flex justify-between gap-20">
-            <p>Privacy Policy</p>
-            <p>Terms and Services</p>
+            <p className=" text-[#ddd]/50 font-bold">@{year} ABS.AI Technologies</p>
+            <div className=" text-[#ddd]/50 font-bold  flex justify-between gap-20">
+            <p className=" cursor-pointer">Privacy Policy</p>
+            <p className=" cursor-pointer">Terms and Services</p>
             </div>
         </div>
       </div>

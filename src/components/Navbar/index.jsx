@@ -5,7 +5,7 @@ import { Menu } from "lucide-react";
 import { Sidebar } from "primereact/sidebar";
 import { useNavigate } from "react-router-dom";
 export default function Navbar() {
-  const [nav, setNav] = useState("h-[50px] w-full px-10 ");
+  const [nav, setNav] = useState("h-[50px] lg:px-40 px-20  w-full ");
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function Navbar() {
           "h-[50px] px-20 lg:px-20 text-white lg:w-[800px] rounded-3xl w-[calc(100%-70px)] translate-x-[30px]  lg:translate-x-[300px] translate-y-4 pr-4 "
         );
       } else {
-        setNav("h-[50px] px-10 w-full ");
+        setNav("h-[50px] lg:px-40 px-20  w-full ");
       }
     };
     window.addEventListener("scroll", shrinkHeader);
@@ -33,17 +33,18 @@ export default function Navbar() {
     >
       <div className={` flex justify-between items-center`}>
         <img
+        onClick={()=> navigate("/")}
           src={
             document.body.scrollTop > 30 ||
             document.documentElement.scrollTop > 30 || window.innerWidth <= 780
               ? "/collapsed_app_bar_image.png"
               : "/logo.png"
           }
-          className={`duration-700 ${
+          className={`duration-700 cursor-pointer ${
             document.body.scrollTop > 30 ||
             document.documentElement.scrollTop > 30
               ? "w-10 h-10 ml-[-60px] mb-5"
-              :window.innerWidth <= 780 ? "w-10":
+              :window.innerWidth <= 780 ? "w-10 ":
               
               "w-56"
           }`}
@@ -58,6 +59,7 @@ export default function Navbar() {
           }`}
         >
                     <li
+                    onClick={()=> navigate("/")}
             className={` cursor-pointer hover:bg-slate-800 duration-500 py-1 px-2 rounded-3xl ${
               document.body.scrollTop > 30 ||
               document.documentElement.scrollTop > 30
@@ -78,6 +80,7 @@ export default function Navbar() {
             About
           </li>
           <li
+          onClick={()=> navigate("/offerings-solutions")}
             className={` flex gap-1 items-center cursor-pointer hover:bg-slate-800 duration-500 py-1 px-2 rounded-3xl ${
               document.body.scrollTop > 30 ||
               document.documentElement.scrollTop > 30
@@ -89,6 +92,7 @@ export default function Navbar() {
             <MdKeyboardArrowDown className=" text-2xl text-white" />
           </li>
           <li
+            onClick={()=> navigate("/camp-blogs")}
             className={` flex gap-1 items-center cursor-pointer hover:bg-slate-800 duration-500 py-1 px-2 rounded-3xl ${
               document.body.scrollTop > 30 ||
               document.documentElement.scrollTop > 30
@@ -101,6 +105,7 @@ export default function Navbar() {
 
           </li>
           <li
+          onClick={()=> navigate("/careers")}
             className={` cursor-pointer hover:bg-slate-800 duration-500 py-1 px-2 rounded-3xl ${
               document.body.scrollTop > 30 ||
               document.documentElement.scrollTop > 30

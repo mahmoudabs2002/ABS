@@ -4,24 +4,30 @@ import DateSet from "../components/dataSet";
 import ProjectSection from "../components/projectSection";
 import WorkedSection from "../components/workedSection";
 import ApsSection from "../components/apsSection";
+// import { useNavigate } from "react-router-dom";
 import Collaborations from "../components/collaborations";
 import Commen from "../components/commonSection";
 import Footer from "../components/Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "animate.css";
+import Navbar from "../components/Navbar";
 
 export default function Home() {
   const [slide, setSlide] = useState(1);
+
+  // Set autoplay functionality using useEffect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSlide(prevSlide => (prevSlide === 7 ? 1 : prevSlide + 1)); // Loop back to slide 1 after 7
+    }, 4000); // Change slide every 4 seconds
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(interval);
+  }, []); // Empty dependency array ensures this runs once on component mount
   
-  // setInterval(() =>{
-  //   if(slide === 7) {
-  //     setSlide(1)
-  //   } else (
-  //     setSlide(slide + 1)
-  //   )
-  // }, 4000);
   return (
     <div className=" overflow-hidden">
+      <Navbar/>
       <div
         className={` bg-secondary px-20 py-[20px] relative mx-auto duration-500 ${
           slide === 1
@@ -44,7 +50,7 @@ export default function Home() {
         <div className=" text-center mt-10 ">
           {slide === 1 ? (
             <h3
-              className={` duration-300 text-[30px] font-bold  text-white ${
+              className={` duration-300 text-[40px] font-bold  text-white ${
                 slide === 1 || slide === 2 ? "heading1" : ""
               } `}
             >
@@ -225,7 +231,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div
+<div className=" relative z-[500] lg:translate-y-[-50px] lg:translate-x-[-150px]">
+<div
           className={` ${
             slide === 1
               ? " translate-x-[-10] lg:translate-x-40"
@@ -242,7 +249,7 @@ export default function Home() {
               : slide === 7
               ? " translate-x-[-10] lg:translate-x-12"
               : " translate-x-[-10] lg:translate-x-40"
-          } duration-300 flex justify-center z-[80000] relative  mt-8 items-center`}
+          } duration-300 flex justify-center z-[80000] middle  mt-8 items-center`}
         >
           <div
             className={` bg-secondary duration-300 cursor-pointer hover:bg-[#303a40] w-fit ${
@@ -256,7 +263,7 @@ export default function Home() {
                   ? "/website_icon.png"
                   : "/unselected_carousel_slider_index.png"
               }
-              className={`duration-300 ${slide === 1 ? "w-8" : " w-[7px]"}`}
+              className={`duration-300 ${slide === 1 ? "w-8" : " w-2"}`}
               alt=""
             />
           </div>
@@ -272,7 +279,7 @@ export default function Home() {
                   ? "/mobile_icon.png"
                   : "/unselected_carousel_slider_index.png"
               }
-              className={`duration-300 ${slide === 2 ? "w-8" : " w-[7px]"}`}
+              className={`duration-300 ${slide === 2 ? "w-8" : "w-2"}`}
               alt=""
             />
           </div>
@@ -288,7 +295,7 @@ export default function Home() {
                   ? "/ui_icon.png"
                   : "/unselected_carousel_slider_index.png"
               }
-              className={`duration-300 ${slide === 3 ? "w-8" : " w-[7px]"}`}
+              className={`duration-300 ${slide === 3 ? "w-8" : "w-2"}`}
               alt=""
             />
           </div>
@@ -304,7 +311,7 @@ export default function Home() {
                   ? "/computer_vision_icon.png"
                   : "/unselected_carousel_slider_index.png"
               }
-              className={`duration-300 ${slide === 4 ? "w-8" : " w-[7px]"}`}
+              className={`duration-300 ${slide === 4 ? "w-8" : "w-2"}`}
               alt=""
             />
           </div>
@@ -320,7 +327,7 @@ export default function Home() {
                   ? "/nlp_icon.png"
                   : "/unselected_carousel_slider_index.png"
               }
-              className={`duration-300 ${slide === 5 ? "w-8" : " w-[7px]"}`}
+              className={`duration-300 ${slide === 5 ? "w-8" : " w-2"}`}
               alt=""
             />
           </div>
@@ -336,12 +343,12 @@ export default function Home() {
                   ? "/chatbot_icon.png"
                   : "/unselected_carousel_slider_index.png"
               }
-              className={`duration-300 ${slide === 6 ? "w-8" : " w-[7px]"}`}
+              className={`duration-300 ${slide === 6 ? "w-8" : " w-2"}`}
               alt=""
             />
           </div>
           <div
-            className={` bg-secondary duration-300 cursor-pointer hover:bg-[#303a40] w-fit ${
+            className={` bg-secondary  duration-300 cursor-pointer hover:bg-[#303a40] w-fit ${
               slide === 7 ? " p-2 " : " p-3"
             } rounded-full mx-1 `}
             onClick={() => setSlide(7)}
@@ -352,11 +359,12 @@ export default function Home() {
                   ? "/datasets_icon.png"
                   : "/unselected_carousel_slider_index.png"
               }
-              className={`duration-300 ${slide === 7 ? "w-8" : " w-[7px]"}`}
+              className={`duration-300 ${slide === 7 ? "w-8" : " w-[7px] "}`}
               alt=""
             />
           </div>
         </div>
+</div>
 
         <div className=" flex items-center float-end  my-6 bg-primary w-fit py-2 px-8 text-white rounded-3xl">
           <button className=" ">Discover</button>
