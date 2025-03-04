@@ -6,10 +6,35 @@
 body {
     font-family: "Open Sans", sans-serif;
 }
+.swal2-confirm{
+  background-color:#fe5008 !important
+}
+ .swal2-styled {
+  background-color:#fe5008 !important
+}
 
+.swal2-popup  {
+  background-color: #151A1D;
+}
+.swal2-title {
+  color:#fe5008 !important
+}
+.swal2-html-container {
+  color: white !important;
+}
+.swal2-success-line-tip {
+  background-color: #fe5008 !important;
+}
+.swal2-success-line-long {
+  background-color: #fe5008 !important;
+}
+.swal2-success-ring {
+ border: .25em solid #fe5008 !important;
+}
 .p-sidebar-icons{
  transform: translateY(50px);
 }
+
 .middle {
   position: absolute;
   top: 50%;
@@ -398,7 +423,6 @@ body {
     width: 100%;
     height: 500px;
     position: absolute;
-    top: 0;
     left: 0;
     transition: transform 0.7s cubic-bezier(0.6, -0.28, 0.735, 0.045);
     font-size: 16vmin;

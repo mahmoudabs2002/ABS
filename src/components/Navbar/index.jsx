@@ -7,6 +7,9 @@ import { useNavigate } from "react-router-dom";
 export default function Navbar() {
   const [nav, setNav] = useState("h-[50px] lg:px-40 px-20  w-full ");
   const [visible, setVisible] = useState(false);
+  const [offerOpen , setOfferOpen] = useState(false)
+  const [campOpen , setCampOpen] = useState(false)
+
   const navigate = useNavigate();
   useEffect(() => {
     const shrinkHeader = () => {
@@ -29,7 +32,7 @@ export default function Navbar() {
 
   return (
     <div
-      className={` bg-secondary py-2  ${nav} fixed z-[90000] duration-700 `}
+      className={` bg-secondary py-2  ${nav} fixed z-[1000] duration-700 `}
     >
       <div className={` flex justify-between items-center`}>
         <img
@@ -60,7 +63,7 @@ export default function Navbar() {
         >
                     <li
                     onClick={()=> navigate("/")}
-            className={` cursor-pointer hover:bg-slate-800 duration-500 py-1 px-2 rounded-3xl ${
+            className={` cursor-pointer  duration-500 py-1 px-2 rounded-3xl ${
               document.body.scrollTop > 30 ||
               document.documentElement.scrollTop > 30
                 ? "text-sm"
@@ -70,7 +73,8 @@ export default function Navbar() {
             Home
           </li>
           <li
-            className={` cursor-pointer hover:bg-slate-800 duration-500 py-1 px-2 rounded-3xl ${
+          onClick={()=> navigate("/about")}
+            className={` cursor-pointer  duration-500 py-1 px-2 rounded-3xl ${
               document.body.scrollTop > 30 ||
               document.documentElement.scrollTop > 30
                 ? "text-sm"
@@ -80,8 +84,8 @@ export default function Navbar() {
             About
           </li>
           <li
-          onClick={()=> navigate("/offerings-solutions")}
-            className={` flex gap-1 items-center cursor-pointer hover:bg-slate-800 duration-500 py-1 px-2 rounded-3xl ${
+          onClick={()=> offerOpen === true ?  setOfferOpen(false) : setOfferOpen(true)}
+            className={` flex gap-1 items-center cursor-pointer duration-500 py-1 px-2 rounded-3xl ${
               document.body.scrollTop > 30 ||
               document.documentElement.scrollTop > 30
                 ? "text-sm"
@@ -90,23 +94,53 @@ export default function Navbar() {
           >
             <span>Offerings</span>
             <MdKeyboardArrowDown className=" text-2xl text-white" />
+            {
+              offerOpen === true ? 
+              <div>
+                  <div>
+                  <div className=" bg-secondary w-[150px] rounded-xl absolute top-11 right-44">
+                    <ul className=" text-white ">
+                    <li  className=" cursor-pointer  px-8 pt-4 pb-4 hover:bg-white/10 duration-300 rounded-lg" onClick={()=> navigate(`/specialities`)}>Services</li>
+                    <li className=" cursor-pointer  pb-4 px-8 pt-4 hover:bg-white/10 duration-300  " onClick={()=> navigate(`/offerings-solutions`)}>Solutions</li>
+                    </ul>
+                  </div>
+                  </div>
+              </div>
+              :
+               null
+            }
           </li>
           <li
-            onClick={()=> navigate("/camp-blogs")}
-            className={` flex gap-1 items-center cursor-pointer hover:bg-slate-800 duration-500 py-1 px-2 rounded-3xl ${
+            onClick={()=> campOpen === true ?  setCampOpen(false)  : setCampOpen(true)}
+            className={` flex gap-1 items-center cursor-pointer relative duration-500 py-1 px-2 rounded-3xl ${
               document.body.scrollTop > 30 ||
               document.documentElement.scrollTop > 30
                 ? "text-sm"
                 : ""
             }`}
+            
           >
             <span>Camp</span>
             <MdKeyboardArrowDown className=" text-2xl text-white" />
-
+            {
+              campOpen === true ? 
+              <div>
+                  <div>
+                  <div className=" bg-secondary w-[150px] rounded-xl absolute top-11 left-0">
+                    <ul className=" text-white ">
+                    <li  className=" cursor-pointer  px-8 pt-4 pb-4 hover:bg-white/10 duration-300 rounded-lg" onClick={()=> navigate(`/camp-blogs`)}>Blogs</li>
+                    <li className=" cursor-pointer  pb-4 px-8 pt-4 hover:bg-white/10 duration-300  " onClick={()=> navigate(`/courses`)}>Courses</li>
+                    </ul>
+                  </div>
+                  </div>
+              </div>
+              :
+               null
+            }
           </li>
           <li
           onClick={()=> navigate("/careers")}
-            className={` cursor-pointer hover:bg-slate-800 duration-500 py-1 px-2 rounded-3xl ${
+            className={` cursor-pointer  duration-500 py-1 px-2 rounded-3xl ${
               document.body.scrollTop > 30 ||
               document.documentElement.scrollTop > 30
                 ? "text-sm"
@@ -121,7 +155,7 @@ export default function Navbar() {
             className={` border border-[#fe5008] translate-x-12 lg:translate-x-0 rounded-3xl text-white py-1 px-2 ${
               document.body.scrollTop > 30 ||
               document.documentElement.scrollTop > 30
-                ? "mb-5 translate-x-12"
+                ? "mb-5 translate-x-12 lg:mr-[-40px]"
                 : ""
             }`}
             onClick={()=> navigate("/contact")}
@@ -140,14 +174,105 @@ export default function Navbar() {
           <div className={`card flex justify-content-center ${
             document.documentElement.scrollTop > 30 ? "mb-5 mr-2" : ""
           }`}>
-            <Sidebar className=" hidden lg:flex bg-secondary text-white" visible={visible} onHide={() => setVisible(false)}>
-              <h2>Sidebar</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </p>
+            <Sidebar className=" bg-secondary text-white" visible={visible} onHide={() => setVisible(false)}>
+              
+            <ul
+          className={`gap-4 mt-10 flex flex-col  translate-x-7 text-white ${
+            document.body.scrollTop > 30 ||
+            document.documentElement.scrollTop > 30
+              ? " mb-5"
+              : ""
+          }`}
+        >
+                    <li
+                    onClick={()=> navigate("/")}
+            className={` cursor-pointer  duration-500 py-1 px-2 rounded-3xl ${
+              document.body.scrollTop > 30 ||
+              document.documentElement.scrollTop > 30
+                ? "text-sm"
+                : ""
+            }`}
+          >
+            Home
+          </li>
+          <li
+          onClick={()=> navigate("/about")}
+            className={` cursor-pointer  duration-500 py-1 px-2 rounded-3xl ${
+              document.body.scrollTop > 30 ||
+              document.documentElement.scrollTop > 30
+                ? "text-sm"
+                : ""
+            }`}
+          >
+            About
+          </li>
+          <li
+          onClick={()=> offerOpen === true ?  setOfferOpen(false) : setOfferOpen(true)}
+            className={` flex gap-1 items-center cursor-pointer  duration-500 py-1 px-2 rounded-3xl ${
+              document.body.scrollTop > 30 ||
+              document.documentElement.scrollTop > 30
+                ? "text-sm"
+                : ""
+            }`}
+          >
+            <span>Offerings</span>
+            <MdKeyboardArrowDown className=" text-2xl text-white" />
+          </li>
+          {
+              offerOpen === true ? 
+              <div>
+                  <div className="">
+                  <div className=" bg-secondary w-[150px] rounded-xl">
+                    <ul className=" text-white ">
+                    <li  className=" cursor-pointer px-8 pt-4 pb-4 duration-300 rounded-lg" onClick={()=> navigate(`/specialities`)}>Services</li>
+                    <li className=" cursor-pointer  pb-4 px-8 pt-4 duration-300  " onClick={()=> navigate(`/offerings-solutions`)}>Solutions</li>
+                    </ul>
+                  </div>
+                  </div>
+              </div>
+              :
+               null
+            }
+          <li
+            onClick={()=> campOpen === true ?  setCampOpen(false)  : setCampOpen(true)}
+            className={` flex gap-1 items-center cursor-pointer relative duration-500 py-1 px-2 rounded-3xl ${
+              document.body.scrollTop > 30 ||
+              document.documentElement.scrollTop > 30
+                ? "text-sm"
+                : ""
+            }`}
+            
+          >
+            <span>Camp</span>
+            <MdKeyboardArrowDown className=" text-2xl text-white" />
+          </li>
+            {
+              campOpen === true ? 
+              <div>
+                  <div>
+                  <div className=" bg-secondary w-[150px] rounded-xl ">
+                    <ul className=" text-white ">
+                    <li  className=" cursor-pointer  px-8 pt-4 pb-4 duration-300 rounded-lg" onClick={()=> navigate(`/camp-blogs`)}>Blogs</li>
+                    <li className=" cursor-pointer  pb-4 px-8 pt-4 duration-300  " onClick={()=> navigate(`/courses`)}>Courses</li>
+                    </ul>
+                  </div>
+                  </div>
+              </div>
+              :
+               null
+            }
+          <li
+          onClick={()=> navigate("/careers")}
+            className={` cursor-pointer  duration-500 py-1 px-2 rounded-3xl ${
+              document.body.scrollTop > 30 ||
+              document.documentElement.scrollTop > 30
+                ? "text-sm"
+                : ""
+            }`}
+          >
+            Careers
+          </li>
+        </ul>
             </Sidebar>
             <Menu className={`lg:hidden flex text-white mr-10 ml-2 translate-x-12 
           `} onClick={() => setVisible(true)} />

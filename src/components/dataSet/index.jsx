@@ -9,7 +9,7 @@ export default function DateSet() {
       <div className="text-center">
         <h3 className=" text-primary font-bold text-[32px]">Need a Dataset?</h3>
         <p className=" text-white">We are ready</p>
-        <div className=" flex  my-20 lg:gap-10 gap-4 flex-wrap">
+        <div className=" flex justify-center my-20 lg:gap-10 gap-4 flex-wrap">
           <div className=" flex flex-col items-center ">
             <img src="/checkbox_image.png" className="lg:w-8 w-6" alt="" />
             <h3 className=" text-white w-32">Intensive Prior Research</h3>
@@ -51,10 +51,7 @@ export default function DateSet() {
             </div>
             {isOpen === 1 ? (
               <p className={`text-white mt-4 text-left duration-500 overflow-hidden`}>
-                A dtaset is lare group of collected data in different forms like
-                images, text,numeric values and tim series data, Data is
-                beneflcial for any business aiming to take clear and strategic
-                decisions
+A dataset is a large group of collected data in different forms like images, text, numeric values and time series data. Data is beneficial for any business aiming to take clear and strategic decisions. 
               </p>
             ) : null}
           </div>
@@ -65,7 +62,7 @@ export default function DateSet() {
             >
               <div className=" flex items-center gap-2">
                 <CircleHelp />
-                <p>What exactly is a dataset?</p>
+                <p>Why would I need a dataset?</p>
               </div>
               <div>
                 <ChevronUp
@@ -77,10 +74,7 @@ export default function DateSet() {
             </div>
             {isOpen === 2 ? (
               <p className={`text-white mt-4 text-left duration-500 overflow-hidden`}>
-                A dtaset is lare group of collected data in different forms like
-                images, text,numeric values and tim series data, Data is
-                beneflcial for any business aiming to take clear and strategic
-                decisions
+A dataset is originally the fuel to AI Models through which it learns, but it can also help you to take decisions based on clear understanding of the given state of you business either from a client perspective or internal perspective. 
               </p>
             ) : null}
           </div>
@@ -91,7 +85,7 @@ export default function DateSet() {
             >
               <div className=" flex items-center gap-2">
                 <CircleHelp />
-                <p>What exactly is a dataset?</p>
+                <p>What formats do you support?</p>
               </div>
               <div>
                 <ChevronUp
@@ -103,10 +97,7 @@ export default function DateSet() {
             </div>
             {isOpen === 3 ? (
               <p className={`text-white mt-4 text-left duration-500 overflow-hidden`}>
-                A dtaset is lare group of collected data in different forms like
-                images, text,numeric values and tim series data, Data is
-                beneflcial for any business aiming to take clear and strategic
-                decisions
+We have the ability to collect different types of image-based, text-based, numeric value and time series data. We follow industry standards in the formats and structures of our datasets  based on its type and use case.
               </p>
             ) : null}
           </div>

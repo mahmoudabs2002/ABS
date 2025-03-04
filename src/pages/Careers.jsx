@@ -1,6 +1,7 @@
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Search, ListFilter ,ArrowRight , User ,Clock3 , BriefcaseBusiness } from "lucide-react";
 import { jobs } from "../assets/data";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +10,7 @@ export default function Careers() {
   const [selectedTags, setSelectedTags] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const [data , setDate] = useState([])
 
   function formatDate(dateString) {
     // Convert "20/2/2025" to "2025-02-20" (ISO format)
@@ -40,7 +42,7 @@ export default function Careers() {
   }
   
      // Filter data based on search input
-     const filteredData = jobs.filter(
+     const filteredData = data.filter(
         (item) =>
           item.title.toLowerCase().includes(search.toLowerCase()) 
         &&
@@ -57,28 +59,18 @@ export default function Careers() {
           Careers
         </h3>
         <div className=" flex relative mb-12 ">
-          <div className=" flex items-center justify-center mt-10  mx-auto ">
+          <div className=" flex items-center justify-center mt-10 w-full   mx-auto ">
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               type="text"
-              className=" lg:w-[930px] px-8 rounded-xl ml-[-10px] h-[40px]"
+              className=" lg:w-[930px] w-[300px] ml-5 px-8 rounded-xl lg:ml-[-10px] h-[40px]"
               placeholder="Search here"
             />
             <Search className=" text-primary translate-x-[-30px]" />
-            <div>
-              <button
-                onClick={() =>
-                  isOpen === true ? setIsOpen(false) : setIsOpen(true)
-                }
-                className=" bg-white h-[40px] px-4 rounded-xl ml-[-8px] lg:ml-2"
-              >
-                <ListFilter className=" text-primary" />
-              </button>
-            </div>
           </div>
         </div>
-        <div className="mx-40 ">
+        <div className="lg:mx-40 mx-5 ">
         {filteredData.length === 0 ? (
           <div>
             <h3 className=" my-8 relative text-center text-white text-xl">
@@ -89,7 +81,10 @@ export default function Careers() {
         ) : null}
           { filteredData === 0 ? jobs.map((e) => {
             return (
-              <div key={e} onClick={()=> navigate(`/careers-details/${e.id}`)} className=" mb-3 cursor-pointer rounded-xl p-7 bg-secondary">
+              <motion.div   
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }} key={e} onClick={()=> navigate(`/careers-details/${e.id}`)} className=" mb-3 cursor-pointer rounded-xl p-7 bg-secondary">
                 <div className=" relative">
                   <h3 className=" mb-4 text-white text-3xl">{e.title}</h3>
                   <div className=" flex flex-col lg:flex-row  gap-4 text-white/50 ">
@@ -105,12 +100,16 @@ export default function Careers() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             )
           }) :  
           filteredData.map((e) => {
             return (
-              <div key={e} onClick={()=> navigate(`/careers-details/${e.id}`)} className=" mb-3 cursor-pointer rounded-xl p-7 bg-secondary">
+              <motion.div  
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              key={e} onClick={()=> navigate(`/careers-details/${e.id}`)} className=" mb-3 cursor-pointer rounded-xl p-7 bg-secondary">
                 <div className=" relative">
                   <h3 className=" mb-4 text-white text-3xl">{e.title}</h3>
                   <div className="  flex flex-col lg:flex-row gap-4 text-white/50 ">
@@ -126,7 +125,7 @@ export default function Careers() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             )
           })}
         </div>

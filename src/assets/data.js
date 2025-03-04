@@ -429,6 +429,7 @@ export const services = [
             positions: "5 Positions",
             exp: "+2 Years EXP",
             time: "Part Time",
+            desc : " We are seeking a Junior UI/UX Designer with over 2 years of experience to join our team. You'll collaborate with senior designers to create wireframes, prototypes, and high-fidelity mockups, improve user experiences for web and mobile applications, and conduct user research. Proficiency in design tools such as Adobe XD, Figma, or Sketch, and knowledge of basic web technologies is essential. A Bachelor's degree in Design or related field is required. Strong attention to detail, visual design sensibility, and excellent communication skills are a must. Join us to stay updated with design trends and collaborate in a dynamic and innovative environment.",
           },
               {
             id: 2,
@@ -437,6 +438,7 @@ export const services = [
           positions: "5 Positions",
           exp: "+2 Years EXP",
           time: "Part Time",
+          desc : "We are seeking a Junior UI/UX Designer with over 2 years of experience to join our team. You'll collaborate with senior designers to create wireframes, prototypes, and high-fidelity mockups, improve user experiences for web and mobile applications, and conduct user research. Proficiency in design tools such as Adobe XD, Figma, or Sketch, and knowledge of basic web technologies is essential. A Bachelor's degree in Design or related field is required. Strong attention to detail, visual design sensibility, and excellent communication skills are a must. Join us to stay updated with design trends and collaborate in a dynamic and innovative environment.",
         },
         {
             id:1,
@@ -445,5 +447,68 @@ export const services = [
             positions: "5 Positions",
             exp: "+2 Years EXP",
             time: "Part Time",
+            desc : "We are seeking a Junior UI/UX Designer with over 2 years of experience to join our team. You'll collaborate with senior designers to create wireframes, prototypes, and high-fidelity mockups, improve user experiences for web and mobile applications, and conduct user research. Proficiency in design tools such as Adobe XD, Figma, or Sketch, and knowledge of basic web technologies is essential. A Bachelor's degree in Design or related field is required. Strong attention to detail, visual design sensibility, and excellent communication skills are a must. Join us to stay updated with design trends and collaborate in a dynamic and innovative environment.",
           },
       ];
+
+    export const courses = [
+      {
+        id:"3",
+        image: "/courses-1.png",
+        title:"UI/UX Design",
+        desc: "Learn to design beautiful, user-friendly digital experiences. This course covers UI/UX principles, prototyping, and design tools like Figma, with hands-on projects to build your portfolio. Ideal for beginners and aspiring designers.",
+      },
+      {
+        id:"2",
+        image: "/courses-2.png",
+        title:"AI",
+        desc: "Learn the fundamentals of AI, including machine learning and natural language processing. Gain hands-on experience building intelligent applications and solving real-world problems. Perfect for beginners and professionals.",
+      },
+      {
+        id:"1",
+        image: "/courses-3.png",
+        title:"FLUTTER",
+        desc: "Learn to create beautiful, responsive cross-platform mobile apps with Flutter and Dart. Master UI design, state management, and real-world app development for iOS and Android.",
+      },
+    ]
+
+    export const categorys = [
+      { name: 'UI/UX Desgin'},
+      { name: 'App Development'},
+      { name: 'Web Development'},
+      { name: 'Computer Vision'},
+      { name: 'NLP Models'},
+      { name: 'Chatbots'},
+      { name: 'Dataset Collection'},
+  ];
+  
+  export const tags = [
+    { name: 'UI/UX Design' },
+    { name: 'AI (Artificial Intelligence)' },
+    { name: 'Flutter' },
+    { name: 'Cybersecurity' },
+    { name: 'Blockchain and Crypto' },
+    { name: 'Emerging Technologies' },
+    { name: 'Green Technology' },
+    { name: 'Robotics' },
+    { name: 'Biotechnology' },
+    { name: 'Virtual Reality and Augmented Reality' },
+    { name: 'Space Technology' },
+    { name: 'Internet of Things (IoT)' },
+    { name: 'Ethical Technology' },
+    { name: 'Fintech (Financial Technology)' },
+    { name: 'Autonomous Vehicles' },
+    { name: 'Advanced Computing' },
+    { name: 'Tech Startups' },
+    { name: 'Wearable Technology' },
+    { name: 'Edtech (Educational Technology)' },
+    { name: 'Virtual Workspaces' },
+    { name: 'Cloud Computing' },
+    { name: 'Big Data and Analytics' },
+    { name: 'Human-Computer Interaction (HCI)' },
+    { name: 'Digital Transformation' },
+    { name: 'E-commerce' },
+    { name: 'Advanced Networking' },
+    { name: 'Tech in Healthcare' },
+    { name: 'Tech Regulations' },
+]

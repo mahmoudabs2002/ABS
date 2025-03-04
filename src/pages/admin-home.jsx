@@ -13,7 +13,7 @@ import "animate.css";
 import Navbar from "../components/Navbar";
 
 
-export default function Home() {
+export default function AdminHome() {
   const [slide, setSlide] = useState(1);
 
   // Set autoplay functionality using useEffect
@@ -178,7 +178,7 @@ export default function Home() {
             <div className="carousel__item-content top-[-110px]  sm:top-[-70px] lg:top-0 item-1">
               <img
                 className="w-[800px] mt-2 relative mx-auto"
-                src=" website_service_image.png"
+                src="/website_service_image.png"
                 alt=""
               />
             </div>
@@ -186,7 +186,7 @@ export default function Home() {
               {" "}
               <img
                 className="w-[800px] mt-2 relative lg:mx-auto"
-                src="mobile_service_image.png"
+                src="/mobile_service_image.png"
                 alt=""
               />
             </div>
@@ -194,7 +194,7 @@ export default function Home() {
               {" "}
               <img
                 className="w-[800px] mt-2 relative mx-auto"
-                src="ui_service_image.png"
+                src="/ui_service_image.png"
                 alt=""
               />
             </div>
@@ -202,7 +202,7 @@ export default function Home() {
               {" "}
               <img
                 className="w-[800px] mt-2 relative mx-auto"
-                src="computer_vision_service_image.png"
+                src="/computer_vision_service_image.png"
                 alt=""
               />
             </div>
@@ -210,7 +210,7 @@ export default function Home() {
               {" "}
               <img
                 className="w-[800px] mt-2 relative mx-auto"
-                src="nlp_service_image.png"
+                src="/nlp_service_image.png"
                 alt=""
               />
             </div>
@@ -218,7 +218,7 @@ export default function Home() {
               {" "}
               <img
                 className="w-[800px] mt-2 relative mx-auto"
-                src="chatbots_service_image.png"
+                src="/chatbots_service_image.png"
                 alt=""
               />
             </div>
@@ -226,7 +226,7 @@ export default function Home() {
               {" "}
               <img
                 className="w-[800px] mt-2 relative mx-auto"
-                src="datasets_service_image.png"
+                src="/datasets_service_image.png"
                 alt=""
               />
             </div>
@@ -366,10 +366,9 @@ export default function Home() {
           </div>
         </div>
 </div>
-
         <div className=" flex items-center float-end  my-6 w-fit py-2 px-8 text-white rounded-3xl">
           <button className=" "></button>
-          {/* <IoMdArrowForward /> */}
+          <IoMdArrowForward />
         </div>
       </div>
       <OurProjects />
