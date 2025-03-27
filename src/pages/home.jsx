@@ -4,31 +4,65 @@ import DateSet from "../components/dataSet";
 import ProjectSection from "../components/projectSection";
 import WorkedSection from "../components/workedSection";
 import ApsSection from "../components/apsSection";
-// import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import Collaborations from "../components/collaborations";
 import Commen from "../components/commonSection";
 import Footer from "../components/Footer";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "animate.css";
 import Navbar from "../components/Navbar";
-
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
   const [slide, setSlide] = useState(1);
+  const carouselRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (carouselRef.current) {
+        const index = Math.round(
+          carouselRef.current.scrollLeft / window.innerWidth
+        );
+        setSlide(index + 1);
+      }
+    };
+
+    carouselRef.current?.addEventListener("scroll", handleScroll);
+    return () =>
+      carouselRef.current?.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Set autoplay functionality using useEffect
   useEffect(() => {
     const interval = setInterval(() => {
-      setSlide(prevSlide => (prevSlide === 7 ? 1 : prevSlide + 1)); // Loop back to slide 1 after 7
+      setSlide((prevSlide) => (prevSlide === 7 ? 1 : prevSlide + 1)); // Loop back to slide 1 after 7
     }, 4000); // Change slide every 4 seconds
 
     // Cleanup interval on component unmount
     return () => clearInterval(interval);
   }, []); // Empty dependency array ensures this runs once on component mount
-  
+
   return (
     <div className=" overflow-hidden">
-      <Navbar/>
+      <Helmet>
+        <title>ABS.ai | Home</title>
+        <meta
+          name="description"
+          content="Looking for top-notch software development? Our expert team specializes in web and mobile app development, AI solutions, and custom software tailored to your business needs. Contact us today!"
+        />
+        <meta
+          name="keywords"
+          content="abs , ABS ,absai,ABS.ai ,abs.ai , web , app ,Software development company , Custom software solutions , Web development services , Mobile app development , UI/UX design services"
+        />
+        <meta property="og:title" content="ABS.ai" />
+        <meta
+          property="og:description"
+          content="Looking for top-notch software development? Our expert team specializes in web and mobile app development, AI solutions, and custom software tailored to your business needs. Contact us today!"
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
+      <Navbar />
       <div
         className={` bg-secondary px-20 py-[20px] relative mx-auto duration-500 ${
           slide === 1
@@ -85,8 +119,12 @@ export default function Home() {
                 slide === 4 ? "heading4" : ""
               } duration-300 lg:text-[40px] text-[20px] font-bold  text-white `}
             >
-              We create <span className=" text-primary">COMPUTER VISION MODELS</span> that{" "}
-              <br /> <span className=" text-primary">CONVERT IMAGINATION TO REALITY</span>
+              We create{" "}
+              <span className=" text-primary">COMPUTER VISION MODELS</span> that{" "}
+              <br />{" "}
+              <span className=" text-primary">
+                CONVERT IMAGINATION TO REALITY
+              </span>
             </h3>
           ) : slide === 5 ? (
             <h3
@@ -94,8 +132,8 @@ export default function Home() {
                 slide === 5 ? "heading5" : ""
               } duration-300 lg:text-[40px] text-[20px] font-bold  text-white `}
             >
-              We create <span className=" text-primary">CHATBOT AGENTS</span> that{" "}
-              <br /> <span className=" text-primary">KNOW IT ALL</span>
+              We create <span className=" text-primary">CHATBOT AGENTS</span>{" "}
+              that <br /> <span className=" text-primary">KNOW IT ALL</span>
             </h3>
           ) : slide === 6 ? (
             <h3
@@ -232,144 +270,160 @@ export default function Home() {
             </div>
           </div>
         </div>
-<div className=" relative z-[500] lg:translate-y-[-50px] w-full translate-y-[-40px] md:translate-y-[-80px] lg:translate-x-[-130px]">
-<div
-          className={` ${
-            slide === 1
-              ? " translate-x-[-10] lg:translate-x-40"
-              : slide === 2
-              ? " translate-x-[-10] lg:translate-x-32"
-              : slide === 3
-              ? " translate-x-[-10] lg:translate-x-28"
-              : slide === 4
-              ? " translate-x-[-10] lg:translate-x-24"
-              : slide === 5
-              ? " translate-x-[-10] lg:translate-x-20"
-              : slide === 6
-              ? " translate-x-[-10] lg:translate-x-16"
-              : slide === 7
-              ? " translate-x-[-10] lg:translate-x-12"
-              : " translate-x-[-10] lg:translate-x-40"
-          } duration-300 flex justify-center z-[80000] middle  mt-8 items-center`}
-        >
+        <div className=" relative z-[500] lg:translate-y-[-50px] w-full translate-y-[-40px] md:translate-y-[-80px] lg:translate-x-[-130px]">
           <div
-            className={` bg-secondary duration-300 cursor-pointer hover:bg-[#303a40] w-fit ${
-              slide === 1 ? "p-2 " : "p-3"
-            } rounded-full mx-1 `}
-            onClick={() => setSlide(1)}
+            className={` ${
+              slide === 1
+                ? " translate-x-[-10] lg:translate-x-40"
+                : slide === 2
+                ? " translate-x-[-10] lg:translate-x-32"
+                : slide === 3
+                ? " translate-x-[-10] lg:translate-x-28"
+                : slide === 4
+                ? " translate-x-[-10] lg:translate-x-24"
+                : slide === 5
+                ? " translate-x-[-10] lg:translate-x-20"
+                : slide === 6
+                ? " translate-x-[-10] lg:translate-x-16"
+                : slide === 7
+                ? " translate-x-[-10] lg:translate-x-12"
+                : " translate-x-[-10] lg:translate-x-40"
+            } duration-300 flex justify-center z-[80000] middle  mt-8 items-center`}
           >
-            <img
-              src={
-                slide === 1
-                  ? "/website_icon.png"
-                  : "/unselected_carousel_slider_index.png"
-              }
-              className={`duration-300 ${slide === 1 ? "lg:w-8 min-w-8" : "min-w-2 lg:w-2"}`}
-              alt=""
-            />
-          </div>
-          <div
-            className={` bg-secondary duration-300 cursor-pointer hover:bg-[#303a40] w-fit ${
-              slide === 2 ? " p-2 " : " p-3"
-            } rounded-full mx-1 `}
-            onClick={() => setSlide(2)}
-          >
-            <img
-              src={
-                slide === 2
-                  ? "/mobile_icon.png"
-                  : "/unselected_carousel_slider_index.png"
-              }
-              className={`duration-300 ${slide === 2 ?"lg:w-8 min-w-8" : "min-w-2 lg:w-2"}`}
-              alt=""
-            />
-          </div>
-          <div
-            className={` bg-secondary duration-300 cursor-pointer hover:bg-[#303a40] w-fit ${
-              slide === 3 ? " p-2 " : " p-3"
-            } rounded-full mx-1 `}
-            onClick={() => setSlide(3)}
-          >
-            <img
-              src={
-                slide === 3
-                  ? "/ui_icon.png"
-                  : "/unselected_carousel_slider_index.png"
-              }
-              className={`duration-300 ${slide === 3 ?"lg:w-8 min-w-8" : "min-w-2 lg:w-2"}`}
-              alt=""
-            />
-          </div>
-          <div
-            className={` bg-secondary duration-300 cursor-pointer hover:bg-[#303a40] w-fit ${
-              slide === 4 ? " p-2 " : " p-3"
-            } rounded-full mx-1 `}
-            onClick={() => setSlide(4)}
-          >
-            <img
-              src={
-                slide === 4
-                  ? "/computer_vision_icon.png"
-                  : "/unselected_carousel_slider_index.png"
-              }
-              className={`duration-300 ${slide === 4 ?"lg:w-8 min-w-8" : "min-w-2 lg:w-2"}`}
-              alt=""
-            />
-          </div>
-          <div
-            className={` bg-secondary duration-300 cursor-pointer hover:bg-[#303a40] w-fit ${
-              slide === 5 ? " p-2 " : " p-3"
-            } rounded-full mx-1 `}
-            onClick={() => setSlide(5)}
-          >
-            <img
-              src={
-                slide === 5
-                  ? "/nlp_icon.png"
-                  : "/unselected_carousel_slider_index.png"
-              }
-              className={`duration-300 ${slide === 5 ?"lg:w-8 min-w-8" : "min-w-2 lg:w-2"}`}
-              alt=""
-            />
-          </div>
-          <div
-            className={` bg-secondary duration-300 cursor-pointer hover:bg-[#303a40] w-fit ${
-              slide === 6 ? " p-2 " : " p-3"
-            } rounded-full mx-1 `}
-            onClick={() => setSlide(6)}
-          >
-            <img
-              src={
-                slide === 6
-                  ? "/chatbot_icon.png"
-                  : "/unselected_carousel_slider_index.png"
-              }
-              className={`duration-300 ${slide === 6 ?"lg:w-8 min-w-8" : "min-w-2 lg:w-2"}`}
-              alt=""
-            />
-          </div>
-          <div
-            className={` bg-secondary  duration-300 cursor-pointer hover:bg-[#303a40] w-fit ${
-              slide === 7 ? " p-2 " : " p-3"
-            } rounded-full mx-1 `}
-            onClick={() => setSlide(7)}
-          >
-            <img
-              src={
-                slide === 7
-                  ? "/datasets_icon.png"
-                  : "/unselected_carousel_slider_index.png"
-              }
-              className={`duration-300 ${slide === 7 ?"lg:w-8 min-w-8" : "min-w-2 lg:w-2"}`}
-              alt=""
-            />
+            <div
+              className={` bg-secondary duration-300 cursor-pointer hover:bg-[#303a40] w-fit ${
+                slide === 1 ? "p-2 " : "p-3"
+              } rounded-full mx-1 `}
+              onClick={() => setSlide(1)}
+            >
+              <img
+                src={
+                  slide === 1
+                    ? "/website_icon.png"
+                    : "/unselected_carousel_slider_index.png"
+                }
+                className={`duration-300 ${
+                  slide === 1 ? "lg:w-8 min-w-8" : "min-w-2 lg:w-2"
+                }`}
+                alt=""
+              />
+            </div>
+            <div
+              className={` bg-secondary duration-300 cursor-pointer hover:bg-[#303a40] w-fit ${
+                slide === 2 ? " p-2 " : " p-3"
+              } rounded-full mx-1 `}
+              onClick={() => setSlide(2)}
+            >
+              <img
+                src={
+                  slide === 2
+                    ? "/mobile_icon.png"
+                    : "/unselected_carousel_slider_index.png"
+                }
+                className={`duration-300 ${
+                  slide === 2 ? "lg:w-8 min-w-8" : "min-w-2 lg:w-2"
+                }`}
+                alt=""
+              />
+            </div>
+            <div
+              className={` bg-secondary duration-300 cursor-pointer hover:bg-[#303a40] w-fit ${
+                slide === 3 ? " p-2 " : " p-3"
+              } rounded-full mx-1 `}
+              onClick={() => setSlide(3)}
+            >
+              <img
+                src={
+                  slide === 3
+                    ? "/ui_icon.png"
+                    : "/unselected_carousel_slider_index.png"
+                }
+                className={`duration-300 ${
+                  slide === 3 ? "lg:w-8 min-w-8" : "min-w-2 lg:w-2"
+                }`}
+                alt=""
+              />
+            </div>
+            <div
+              className={` bg-secondary duration-300 cursor-pointer hover:bg-[#303a40] w-fit ${
+                slide === 4 ? " p-2 " : " p-3"
+              } rounded-full mx-1 `}
+              onClick={() => setSlide(4)}
+            >
+              <img
+                src={
+                  slide === 4
+                    ? "/computer_vision_icon.png"
+                    : "/unselected_carousel_slider_index.png"
+                }
+                className={`duration-300 ${
+                  slide === 4 ? "lg:w-8 min-w-8" : "min-w-2 lg:w-2"
+                }`}
+                alt=""
+              />
+            </div>
+            <div
+              className={` bg-secondary duration-300 cursor-pointer hover:bg-[#303a40] w-fit ${
+                slide === 5 ? " p-2 " : " p-3"
+              } rounded-full mx-1 `}
+              onClick={() => setSlide(5)}
+            >
+              <img
+                src={
+                  slide === 5
+                    ? "/nlp_icon.png"
+                    : "/unselected_carousel_slider_index.png"
+                }
+                className={`duration-300 ${
+                  slide === 5 ? "lg:w-8 min-w-8" : "min-w-2 lg:w-2"
+                }`}
+                alt=""
+              />
+            </div>
+            <div
+              className={` bg-secondary duration-300 cursor-pointer hover:bg-[#303a40] w-fit ${
+                slide === 6 ? " p-2 " : " p-3"
+              } rounded-full mx-1 `}
+              onClick={() => setSlide(6)}
+            >
+              <img
+                src={
+                  slide === 6
+                    ? "/chatbot_icon.png"
+                    : "/unselected_carousel_slider_index.png"
+                }
+                className={`duration-300 ${
+                  slide === 6 ? "lg:w-8 min-w-8" : "min-w-2 lg:w-2"
+                }`}
+                alt=""
+              />
+            </div>
+            <div
+              className={` bg-secondary  duration-300 cursor-pointer hover:bg-[#303a40] w-fit ${
+                slide === 7 ? " p-2 " : " p-3"
+              } rounded-full mx-1 `}
+              onClick={() => setSlide(7)}
+            >
+              <img
+                src={
+                  slide === 7
+                    ? "/datasets_icon.png"
+                    : "/unselected_carousel_slider_index.png"
+                }
+                className={`duration-300 ${
+                  slide === 7 ? "lg:w-8 min-w-8" : "min-w-2 lg:w-2"
+                }`}
+                alt=""
+              />
+            </div>
           </div>
         </div>
-</div>
-
-        <div className=" flex items-center float-end  my-6 w-fit py-2 px-8 text-white rounded-3xl">
-          <button className=" "></button>
-          {/* <IoMdArrowForward /> */}
+        <div
+          onClick={() => navigate("/specialities")}
+          className=" cursor-pointer relative flex items-center float-end mr-[-65px] lg:mr-[85px] bg-primary  my-6 w-fit py-2 px-10 text-white rounded-3xl"
+        >
+          <button className=" ">Discover</button>
+          <IoMdArrowForward />
         </div>
       </div>
       <OurProjects />

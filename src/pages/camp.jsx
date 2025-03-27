@@ -6,6 +6,8 @@ import {blogs} from "../assets/data"
 import { useNavigate } from "react-router-dom";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { IoMdArrowForward } from "react-icons/io";
+import { Helmet } from "react-helmet-async";
 export default function Camp() {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
@@ -61,6 +63,23 @@ export default function Camp() {
 
   return (
     <div>
+       <Helmet>
+                    <title>ABS.ai | Blogs</title>
+                    <meta
+                      name="description"
+                      content="Looking for top-notch software development? Our expert team specializes in web and mobile app development, AI solutions, and custom software tailored to your business needs. Contact us today!"
+                    />
+                    <meta
+                      name="keywords"
+                      content="abs , ABS ,absai,ABS.ai ,abs.ai , web , app ,Software development company , Custom software solutions , Web development services , Mobile app development , UI/UX design services"
+                    />
+                    <meta property="og:title" content="ABS.ai" />
+                    <meta
+                      property="og:description"
+                      content="Looking for top-notch software development? Our expert team specializes in web and mobile app development, AI solutions, and custom software tailored to your business needs. Contact us today!"
+                    />
+                    <meta property="og:type" content="website" />
+                  </Helmet>
       <Navbar />
       <div className="bg-secondary/95 relative py-4">
         <img src="/Group 162645 (1).png" className=" absolute top-0" alt="" />
@@ -91,17 +110,17 @@ export default function Camp() {
             <h3 className=" text-white text-2xl mb-4 relative text-center ">another blogs</h3>
           </div>
         ) : null}
-        <div className=" flex flex-wrap gap-7 relative mx-40">
+        <div className=" flex flex-wrap gap-7 justify-center lg:justify-start relative mx-40">
           {filteredData.length === 0
             ? data.map((e) => {
                 return (
                   <div
-                  className="  cursor-pointer translate-x-[-80px] lg:translate-x-0 relative bg-secondary rounded-xl w-[320px]"
+                  className="  cursor-pointer lg:translate-x-0 relative bg-secondary rounded-xl w-[320px]"
                   key={e}
-                  // onClick={()=> navigate(`/blog/${e.title}`)}
+                  onClick={()=> window.location.href = `${e.link}`}
                 >
                   <img
-                    className="max-w-[320px] max-h-[250px] min-h-[250px]   object-cover "
+                    className="max-w-[320px] rounded-t-xl max-h-[250px] min-h-[250px]   object-cover "
                     src={e.image}
                     alt=""
                   />
@@ -129,12 +148,12 @@ export default function Camp() {
             : currentData.map((e) => {
                 return (
                   <div
-                    className="  cursor-pointer translate-x-[-80px] lg:translate-x-0 relative bg-secondary rounded-xl w-[320px]"
+                    className="  cursor-pointer lg:translate-x-0 relative bg-secondary rounded-xl w-[320px]"
                     key={e}
-                    // onClick={()=> navigate(`/blog/${e.title}`)}
+                    onClick={()=> window.location.href = `${e.link}`}
                   >
                     <img
-                      className="max-w-[320px] max-h-[250px] min-h-[250px]  object-cover "
+                      className="max-w-[320px] rounded-t-xl max-h-[250px] min-h-[250px]  object-cover "
                       src={e.image}
                       alt=""
                     />
@@ -152,28 +171,28 @@ export default function Camp() {
                           );
                         })}
                       </div> */}
-                      <button className=" capitalize absolute right-3 bottom-4 text-right text-white bg-primary py-2 px-2 rounded-full">
-                        more info
+                      <button className=" capitalize absolute right-3 bottom-4 text-right text-white bg-primary py-3 px-3 rounded-full">
+                                  <IoMdArrowForward />
                       </button>
                     </div>
                   </div>
                 );
               })}
         </div>
-        <div className=" border border-[#eee] bg-white relative w-fit mx-auto text-primary my-4 text-center">
+        <div className="  rounded-xl bg-secondary relative w-fit mx-auto text-primary my-6 mt-8 text-center">
         <button
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          className="  relative border-l border-t border-b  px-2  z-20  mr-2 disabled:text-primary/50  disabled:cursor-not-allowed"
+          className="  relative  px-2  z-20  mr-2 disabled:text-primary/50  disabled:cursor-not-allowed"
           disabled={currentPage === 1}
         >
           Prev
         </button>
-        <span className=" border px-4 ">
+        <span className="  px-4 ">
           Page {currentPage} of {totalPages || 1}
         </span>
         <button
         onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-           className=" border-r border-t px-4 relative  z-20  ml-2 cursor-pointer disabled:text-primary/50  disabled:cursor-not-allowed"
+           className=" px-4 relative  z-20  ml-2 cursor-pointer disabled:text-primary/50  disabled:cursor-not-allowed"
           disabled={currentPage === totalPages || totalPages === 0}
         >
           Next

@@ -92,13 +92,16 @@ export default function Collaborations() {
           createdAt: new Date(),
         });
         console.log("Document written with ID: ", docRef.id);
+      setVisible(false)
         setImage(""); // Clear input field after adding
                   Swal.fire({
                     title: "data added successfully",
                     icon: "success",
                     draggable: true,
                   });
-        window.location.reload();
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 2000);
       } catch (error) {
         console.error("Error adding document: ", error);
       }
@@ -119,7 +122,7 @@ export default function Collaborations() {
       }
     };
   return (
-    <div className=" flex relative lg:flex-row flex-col  items-center lg:gap-52 gap-20 px-20 lg:px-40 bg-secondary">
+    <div className=" flex relative lg:flex-row flex-col  items-center lg:gap-52 gap-20 px-20 lg:px-64 bg-secondary">
       <h3 className=" text-center lg:-rotate-90 lg:w-20 lg:text-[80px] w-10 text-[50px] lg:leading-[150px] mr-72 lg:mr-0 lg:mt-80 text-white/10 font-bold  ">
         Development
         <pre> +Business</pre>
@@ -137,11 +140,11 @@ export default function Collaborations() {
           {
             data.map((e,index) => {
              return(
-              <div key={e?.id} className={` ${isOpen === index ? " h-[370px] w-96 bg-black/30": "w-24"} cursor-pointer overflow-hidden relative duration-[1s]`} onClick={()=> isOpen === index ? setIsOpen(-1) :setIsOpen(index)}>
+              <div key={e?.id} className={` ${isOpen === index ? " h-[370px] w-96 bg-black/30": "w-24"} transition-all  ease-in-out cursor-pointer overflow-hidden relative duration-[1s]`} onClick={()=> isOpen === index ? setIsOpen(-1) :setIsOpen(index)}>
               <img
                 src={e.image}
                 alt=""
-                className={` duration-1000 ${isOpen === index ? " rotate-90 translate-y-[-90px] translate-x-40 lg:translate-x-0 lg:translate-y-0  w-16 lg:absolute lg:right-[150px] -top-20" :"w-20 mx-2 " } `}
+                className={` duration-1000 ${isOpen === index ? " rotate-90 translate-y-[-90px] translate-x-40 lg:translate-x-0 lg:translate-y-0  w-16 lg:absolute lg:right-[150px] -top-20" :"w-20 mx-2 " } transition-all duration-700  `}
               />
               <p className={` duration-300 text-white ${isOpen === index ? "w-[300px] text-center  absolute top-28 text-[13px] left-12" : "w-0 opacity-0 absolute -left-64"} `}>
               {e.dec}

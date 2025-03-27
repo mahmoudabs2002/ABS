@@ -3,8 +3,6 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { motion } from "framer-motion";
 import { Sidebar } from 'primereact/sidebar';
-
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import {
   collection,
   addDoc,
@@ -12,8 +10,8 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import { storage } from "../firebase";
 import { db } from "../firebase";
+import { Helmet } from "react-helmet-async";
 
 export default function Offering() {
   const [data, setData] = useState([]);
@@ -44,6 +42,23 @@ export default function Offering() {
 
   return (
     <div>
+            <Helmet>
+              <title>ABS.ai | Offerings-Solutions</title>
+              <meta
+                name="description"
+                content="Looking for top-notch software development? Our expert team specializes in web and mobile app development, AI solutions, and custom software tailored to your business needs. Contact us today!"
+              />
+              <meta
+                name="keywords"
+                content="abs , ABS ,absai,ABS.ai ,abs.ai , web , app ,Software development company , Custom software solutions , Web development services , Mobile app development , UI/UX design services"
+              />
+              <meta property="og:title" content="ABS.ai" />
+              <meta
+                property="og:description"
+                content="Looking for top-notch software development? Our expert team specializes in web and mobile app development, AI solutions, and custom software tailored to your business needs. Contact us today!"
+              />
+              <meta property="og:type" content="website" />
+            </Helmet>
       <Navbar />
       <div className="bg-[url(/contact_us_background_image.png)] pb-10  bg-top">
         <h3
@@ -59,10 +74,10 @@ export default function Offering() {
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
-                className={`items-center mb-14 flex flex-col gap-10 ${index % 2 === 0  ? "lg:flex-row-reverse ":" lg:flex-row" }`}
+                className={`items-center mb-14 flex flex-col gap-10 ${index % 2 === 0  ? " lg:flex-row  ":"lg:flex-row-reverse" }`}
                 key={e.id}
               >
-                <img src={e.image} alt="" className=" w-[500px]" />
+                <img src={e.image} alt="" className=" rounded-xl w-[500px]" />
                 <div>
                   <h3 className=" text-primary text-[24px] font-semibold">{e.title}</h3>
                   <p className=" text-white">

@@ -125,6 +125,10 @@ export const ai = [
         id : 7,
         name : "Dataset Collection"
       },
+      {
+        id : 8,
+        name : "Nothing"
+      },
 ];
 
 export const ui = [
@@ -352,7 +356,7 @@ export const projects = [
 
 export const services = [
         {
-            title : "UI/UX Design",
+            title : "UI/UX Desgin",
             image : "/our_specialties_ui_background_image.png"
         },
         {
@@ -372,7 +376,7 @@ export const services = [
             image : "/our_specialties_nlp_background_image.png"
         },
         {
-            title : "Chatbot Creation",
+            title : "Chatbots",
             image : "/our_specialties_chatbot_background_image.png"
         },
         {

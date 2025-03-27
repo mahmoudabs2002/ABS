@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes} from "react-router-dom"
 import Home from "./pages/home"
 import Contact from "./pages/contact"
 import OurSpecialities from "./pages/ourSpecialities"
@@ -13,10 +13,11 @@ import AddProject from "./pages/add-project"
 import About from "./pages/about"
 import AddCareers from "./pages/AddCareers"
 import AdminHome from "./pages/admin-home"
-
+import ScrollToTop from "./components/ScrollToTop";
 function App() {
   return (
     <>
+    <ScrollToTop />
     <Routes>
     <Route path="/" element={<Home/>}/>
     <Route path="/admin/home/add/items" element={<AdminHome/>}/>

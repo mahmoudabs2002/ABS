@@ -12,9 +12,28 @@ body {
  .swal2-styled {
   background-color:#fe5008 !important
 }
-
+.p-datepicker .p-today {
+  border: 2px solid #ff9800 !important; /* Orange border */
+  border-radius: 50%;
+}
+.p-datepicker table td.p-highlight {
+  background-color: #ff5722 !important;
+  color: white !important;
+}
+.p-datepicker .p-highlight {
+  background-color: #d7b8af !important; /* Change to any color */
+  color: #fe5008 !important; /* Change text color */
+}
+.p-datepicker .p-today {
+  border: 2px solid #ff9800 !important; /* Orange border */
+  border-radius: 50%;
+}
 .swal2-popup  {
   background-color: #151A1D;
+  z-index: 1000 !important;
+}
+.p-datepicker table td {
+  padding: -0.5rem !important; 
 }
 .swal2-title {
   color:#fe5008 !important
@@ -33,6 +52,17 @@ body {
 }
 .p-sidebar-icons{
  transform: translateY(50px);
+}
+.p-dialog {
+  background-color: #151A1D !important;/* Change background */
+  color: white !important; /* Change text color */
+}
+
+.p-dialog .p-dialog-content {
+  background-color: #151A1D !important; /* Change content background */
+}
+.p-dialog-header {
+  background-color: #151A1D !important;
 }
 
 .middle {

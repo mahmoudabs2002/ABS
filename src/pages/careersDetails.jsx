@@ -8,6 +8,7 @@ import { db } from "../firebase"; // Ensure db is the correct instance
 
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
+import { Helmet } from "react-helmet-async";
 const database = getDatabase(); // Initialize database
 
 export default function CareersDetails(){
@@ -34,11 +35,25 @@ useEffect(() => {
 
   fetchData();
 }, [id]);
-
-console.log(item)
-    // const item = jobs.find(item => item.id === Number(id));
   return (
     <div>
+       <Helmet>
+                    <title>ABS.ai</title>
+                    <meta
+                      name="description"
+                      content="Looking for top-notch software development? Our expert team specializes in web and mobile app development, AI solutions, and custom software tailored to your business needs. Contact us today!"
+                    />
+                    <meta
+                      name="keywords"
+                      content="abs , ABS ,absai,ABS.ai ,abs.ai , web , app ,Software development company , Custom software solutions , Web development services , Mobile app development , UI/UX design services"
+                    />
+                    <meta property="og:title" content="ABS.ai" />
+                    <meta
+                      property="og:description"
+                      content="Looking for top-notch software development? Our expert team specializes in web and mobile app development, AI solutions, and custom software tailored to your business needs. Contact us today!"
+                    />
+                    <meta property="og:type" content="website" />
+                  </Helmet>
     <Navbar />
     <div>
       <div className="bg-secondary px-10 pb-4 pt-[65px]">
@@ -47,8 +62,8 @@ console.log(item)
             <>
               <h3 className="font-bold text-white text-3xl">{item.title}</h3>
               <div className="flex flex-col lg:flex-row ml-[-8px] mt-4 gap-4 text-white/50">
-                <div className="flex gap-2"><User /> {item.position}</div>
-                <div className="flex gap-2"><BriefcaseBusiness /> {item.exp}</div>
+                <div className="flex gap-2"><User /> {item.position} positions</div>
+                <div className="flex gap-2"><BriefcaseBusiness /> {item.exp} year</div>
                 <div className="flex gap-2"><Clock3 /> {item.time}</div>
               </div>
             </>

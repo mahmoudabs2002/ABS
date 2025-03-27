@@ -1,11 +1,20 @@
+import { useLocation } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 // import { useState } from "react";
 // import { motion } from "framer-motion";
 // import { Search, ListFilter} from "lucide-react";
 // import { useNavigate } from "react-router-dom";
 // import { courses } from "../assets/data";
 export default function Courses() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
+
     // const [search, setSearch] = useState("");
     // // const [filter, setFilter] = useState("");
     // const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +30,23 @@ export default function Courses() {
         //   );
   return (
     <div>
+       <Helmet>
+                    <title>ABS.ai | Courses</title>
+                    <meta
+                      name="description"
+                      content="Looking for top-notch software development? Our expert team specializes in web and mobile app development, AI solutions, and custom software tailored to your business needs. Contact us today!"
+                    />
+                    <meta
+                      name="keywords"
+                      content="abs , ABS ,absai,ABS.ai ,abs.ai , web , app ,Software development company , Custom software solutions , Web development services , Mobile app development , UI/UX design services"
+                    />
+                    <meta property="og:title" content="ABS.ai" />
+                    <meta
+                      property="og:description"
+                      content="Looking for top-notch software development? Our expert team specializes in web and mobile app development, AI solutions, and custom software tailored to your business needs. Contact us today!"
+                    />
+                    <meta property="og:type" content="website" />
+                  </Helmet>
       <Navbar/>
       <div className=" bg-[url(/contact_us_background_image.png)] flex items-center justify-center  bg-top h-screen text-center  ">
          <h3

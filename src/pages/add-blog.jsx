@@ -5,7 +5,7 @@ import { Search } from "lucide-react";
 import { Dialog } from "primereact/dialog";
 import Swal from "sweetalert2";
 
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { db } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import {
@@ -26,7 +26,7 @@ export default function AddBlog() {
   const [caption, setCaption] = useState("");
   const [link, setLink] = useState("");
   const [visible, setVisible] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [data, setData] = useState([]);
 
@@ -109,11 +109,11 @@ export default function AddBlog() {
       setImage(""); // Clear input field after adding
       setCaption(""); // Clear input field after adding
       setLink(""); // Clear input field after adding
-                Swal.fire({
-                  title: "data added successfully",
-                  icon: "success",
-                  draggable: true,
-                });
+      Swal.fire({
+        title: "data added successfully",
+        icon: "success",
+        draggable: true,
+      });
     } catch (error) {
       console.error("Error adding document: ", error);
     }
@@ -134,11 +134,11 @@ export default function AddBlog() {
   const deleteDocument = async (collectionName, docId) => {
     try {
       await deleteDoc(doc(db, collectionName, docId));
-       Swal.fire({
-         title: "Document successfully deleted!",
-         icon: "success",
-         draggable: true,
-       });
+      Swal.fire({
+        title: "Document successfully deleted!",
+        icon: "success",
+        draggable: true,
+      });
     } catch (error) {
       console.error("Error deleting document: ", error);
     }
@@ -159,10 +159,10 @@ export default function AddBlog() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               type="text"
-              className=" lg:w-[930px] px-8 rounded-xl ml-[-10px] h-[40px]"
+              className="lg:w-[930px] px-8 rounded-xl ml-[-10px] h-[40px]"
               placeholder="Search here"
             />
-            <Search className=" text-primary translate-x-[-30px]" />
+            <Search className="text-primary translate-x-[-30px]" />
           </div>
         </div>
         {filteredData.length === 0 ? (
@@ -281,8 +281,13 @@ export default function AddBlog() {
             onChange={handleFileChange}
             ref={fileInputRef}
             className=" border block rounded-lg w-full  my-2 "
-          /> {progress}%
-          <progress value={progress} max="100" className=" block my-2"></progress>
+          />{" "}
+          {progress}%
+          <progress
+            value={progress}
+            max="100"
+            className=" block my-2"
+          ></progress>
           <label htmlFor=""> add link</label>
           <input
             type="text"

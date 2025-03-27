@@ -1,51 +1,48 @@
 /* eslint-disable react/no-unknown-property */
-import { AlertCircle, Mic } from "lucide-react";
+import { Mic } from "lucide-react";
 import { Navigation } from "lucide-react";
 import { Paperclip } from "lucide-react";
 import { ChevronLeft } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoMdArrowForward } from "react-icons/io";
 import { TypeAnimation } from "react-type-animation";
-import { Calendar } from "primereact/calendar";
+import { v4 as uuidv4 } from "uuid"; // Generate unique IDs
+import { Tooltip } from 'primereact/tooltip';
 import emailjs from "emailjs-com";
+
+import ReactMarkdown from "react-markdown";
 import { industry, platform, design, ai } from "../assets/data";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Toast } from "primereact/toast";
 import Swal from "sweetalert2";
+import { useLocation } from "react-router-dom";
+import ContactForm from "../components/contactForm";
+import { Helmet } from "react-helmet-async";
+// import { io } from "socket.io-client";
+import MeetingScheduler from "../components/meeting";
+import axios from "axios";
 
 export default function Contact() {
-  // const indRef = useRef(null);
+    const micRef = useRef(null);
+  const paperclipRef = useRef(null);
+
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
   const toastTopCenter = useRef(null);
   const [active, setActive] = useState(true);
   const [focas, setFocas] = useState(false);
-  // const [industrySelect , setIndustrySelect] = useState()
-  // const [designSelect , setDesignSelect] = useState()
-  const [location, setlocation] = useState();
   const [platformSelect, setPlatformSelect] = useState([]);
   const [aiSelect, setAiSelect] = useState([]);
   const [section, setSection] = useState(1);
   const [date, setDate] = useState(null);
-  const [visible, setVisible] = useState(false);
-  // const [time, setTime] = useState(null);
-  // const [workhour, setWorkhour] = useState(null);
-  // const [firstname , setfirstname] = useState('')
-  // const [lastname , setLastname] = useState('')
-  // const [emailValid , setEmailValid] = useState(false)
-  // const [email , setEmail] = useState()
-  // const [mobile , setMobile] = useState('')
-  // const [dec , setDec] = useState('')
-  const showMessage = (ref, severity) => {
-    const label = "all field is requierd";
+  const { pathname } = useLocation();
+  const [userId, setUserId] = useState("");
 
-    ref.current.show({
-      severity: severity,
-      summary: label,
-      detail: label,
-      life: 3000,
-    });
-  };
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
   // const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const handlePlatform = (p) => {
     if (!platformSelect.includes(p)) {
@@ -85,7 +82,6 @@ export default function Contact() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   const sendEmail = (e) => {
     e.preventDefault();
     platformSelect.forEach((name) => {
@@ -152,7 +148,7 @@ export default function Contact() {
           console.log("SUCCESS!", response.status, response.text);
           Swal.fire({
             title: "Request Received",
-            text:"Our team will contact you in 2 Days time",
+            text: "Our team will contact you in 2 Days time",
             icon: "success",
             draggable: true,
           });
@@ -167,12 +163,98 @@ export default function Contact() {
         }
       );
   };
-  const firstnameEmpty = formData.firstname === "";
-  const lastnameEmpty = formData.lastname === "";
-  const mobileEmpty = formData.emailmail === "";
+  
+  const animateTypingEffect = (fullText) => {
+    if (!fullText) {
+      console.error("Error: fullText is undefined or empty");
+      return;
+    }
+  
+    let index = 0;
+    let currentText = "";
+  
+    const interval = setInterval(() => {
+      if (index < fullText.length) {
+        currentText += fullText[index];
+        index++;
+  
+        setMessages((prev) => {
+          const filtered = prev.filter((msg) => msg.animated !== true);
+          return [...filtered, { user: false, text: currentText, animated: true }];
+        });
+      } else {
+        clearInterval(interval);
+  
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.animated ? { ...msg, animated: false } : msg
+          )
+        );
+      }
+    }, 50);
+  };
+  
 
+  // Generate or retrieve user ID
+  useEffect(() => {
+    let storedUserId = localStorage.getItem("userId");
+    if (!storedUserId) {
+      storedUserId = uuidv4(); // Generate new ID
+      localStorage.setItem("userId", storedUserId);
+    }
+    setUserId(storedUserId);
+  }, []);
+  const sendMessage = async () => {
+    if (!message.trim()) return;
+
+    const newMessages = [...messages, { user: true, text: message }];
+    setMessages(newMessages);
+    setMessage("");
+    setLoading(true); // Show "Bot is typing..."
+
+    try {
+      axios.defaults.headers.common["AbsBackendAI"] =
+  "sadkjansdiuanejacjakcadnckasjcnaijbcjabcbakibafaeob";
+      const response = await axios.post(
+        "http://161.97.126.168:8000/chat",
+        JSON.stringify({
+          message: message,
+          thread_id: userId,
+        }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      // Animate typing effect
+      animateTypingEffect(response.data.chatbot_response);
+      
+    } catch (error) {
+      console.error("Error sending message:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <>
+      <Helmet>
+        <title>ABS.ai | Contact us</title>
+        <meta
+          name="description"
+          content="Looking for top-notch software development? Our expert team specializes in web and mobile app development, AI solutions, and custom software tailored to your business needs. Contact us today!"
+        />
+        <meta
+          name="keywords"
+          content="abs , ABS ,absai,ABS.ai ,abs.ai , web , app ,Software development company , Custom software solutions , Web development services , Mobile app development , UI/UX design services"
+        />
+        <meta property="og:title" content="ABS.ai" />
+        <meta
+          property="og:description"
+          content="Looking for top-notch software development? Our expert team specializes in web and mobile app development, AI solutions, and custom software tailored to your business needs. Contact us today!"
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <Navbar />
       <div className=" relative pb-4 min-h-screen overflow-hidden bg-cover bg-[url('/contact_us_background_image.png')]">
         <div className=" flex flex-col justify-center overflow-hidden items-center pt-20">
@@ -194,22 +276,22 @@ export default function Contact() {
                 sequence={["i want to build a website for my company", 1000]}
                 wrapper="span"
                 speed={50}
-                className="absolute left-16 z-10 text-sm text-gray-300"
+                className="absolute left-16 w-40 md:w-full z-10 text-sm text-gray-300"
               />
             )}
             <input
               type="text"
               onFocus={() => setFocas(true)}
               onBlur={() => setFocas(false)}
-              className="bg-secondary text-white pl-16 pr-40 w-full h-12 rounded-3xl outline-none"
+              className="bg-secondary text-white  pl-16 pr-40 w-full h-12 rounded-3xl outline-none"
             />
             <button className="absolute right-2 z-10 bg-primary text-white py-2 px-8 rounded-3xl hover:bg-primary/90 transition duration-200">
               tell me
             </button>
           </div>
-          <button className="border border-primary text-white font-bold rounded-3xl px-4 mt-4 py-2 hover:bg-secondary transition duration-200">
+          {/* <button className="border border-primary text-white font-bold rounded-3xl px-4 mt-4 py-2 hover:bg-secondary transition duration-200">
             contact us the old way
-          </button>
+          </button> */}
           <div className="mt-4">
             <marquee scrollamount="4">
               <div className=" inline-block mx-4 px-3 py-6 rounded-md bg-secondary text-white ">
@@ -268,7 +350,7 @@ export default function Contact() {
           </div>
           <div className=" flex overflow-hidden flex-col-reverse lg:flex-row relative mt-6">
             <div
-              className={`flex lg:translate-x-24 overflow-hidden translate-x-[230px] mt-8 w-[300px] lg:w-[600px] duration-700 ${
+              className={`flex lg:translate-x-24 overflow-hidden translate-x-[210px] mt-8 w-[300px] lg:w-[600px] duration-700 ${
                 active === false ? "opacity-0" : ""
               }`}
             >
@@ -317,41 +399,76 @@ export default function Contact() {
               </div>
             </div>
             <div
-              className={`mr-[440px] lg:mr-0  ${
-                active === true ? "chat-forward" : "chat-backward "
+              className={`mr-[400px] lg:mr-0  ${
+                active === true ? "chat-forward" : "chat-backward"
               }`}
             >
-              <div className="bg-primary hidden lg:block absolute rounded-l-2xl  text-white h-full">
+              <div
+                onClick={() =>
+                  active === true ? setActive(false) : setActive(true)
+                }
+                className="bg-primary hidden cursor-pointer lg:block absolute rounded-l-2xl  text-white h-full"
+              >
                 <div
                   className={`w-7 translate-y-72 duration-300 cursor-pointer ${
                     active === true ? "" : "rotate-180"
                   }`}
-                  onClick={() =>
-                    active === true ? setActive(false) : setActive(true)
-                  }
                 >
                   <ChevronLeft className=" font-bold w-8 h-8 translate-x-[-4px]" />
                 </div>
               </div>
-              <div className=" bg-secondary lg:rounded-tr-2xl rounded-t-2xl flex lg:ml-4 h-20 px-4 items-center border-b border-white ">
-                <img src="/chatbot_beta_icon.png" alt="" className=" w-16" />
-                <div className=" text-white">
-                  <h3 className=" text-sm"> ABS.AI CHATBOT</h3>
-                  <p className=" text-xs text-[#A2A6A8]">
-                    Answers all your project inquiries
-                  </p>
+              <div className="">
+                <div className="bg-secondary lg:rounded-tr-2xl rounded-t-2xl flex lg:ml-4 h-20 px-4 items-center border-b border-white">
+                  <img src="/chatbot_beta_icon.png" alt="" className="w-16" />
+                  <div className="text-white">
+                    <h3 className="text-sm">ABS.AI CHATBOT</h3>
+                    <p className="text-xs text-[#A2A6A8]">
+                      Answers all your project inquiries
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className=" bg-black h-[500px] lg:w-[800px] w-[410px]"></div>
-              <div className=" bg-[#151A1D] lg:ml-3 lg:rounded-br-2xl rounded-b-2xl border-t h-16 border-white flex items-center ">
-                <Mic className=" text-white ml-10 mr-4 w-8" />
-                <Paperclip className=" text-white w-8" />
-                <input
-                  type="text"
-                  placeholder="Type your message..."
-                  className=" bg-[#151A1D] w-full outline-none px-10 caret-white"
-                />
-                <Navigation className=" text-white mr-4 w-8" />
+                <div className="bg-black h-[500px] lg:w-[800px] w-[390px] p-4 overflow-y-auto flex flex-col">
+                  {messages.map((msg, index) => (
+                    <div 
+                      key={index}
+                      className={`mb-2 mx-6 p-2 rounded-lg max-w-fit ${
+                        msg.user ? " bg-primary self-start w-[200px] lg:w-[400px] text-white" : "bg-gray-700 w-[200px] lg:w-[400px] self-end text-white"
+                      }`}
+                    >
+                      <ReactMarkdown>{msg.text}</ReactMarkdown>
+                    </div>
+                  ))}
+
+                  {/* Fix: Move "Bot is typing..." inside chat messages */}
+                  {loading && (
+  <div className="bg-gray-700 text-white p-2 rounded-lg max-w-[75%] self-end">
+    Bot is typing...
+  </div>
+)}
+                </div>
+                <div className="bg-[#151A1D] lg:ml-3 lg:rounded-br-2xl rounded-b-2xl border-t h-16 border-white flex items-center px-4">
+                    <Tooltip target={micRef} content="this feature comming soon" position="top" />
+      <Tooltip target={paperclipRef} content=" this feature comming soon" position="top" />
+
+      {/* Mic Icon with Tooltip */}
+      <Mic ref={micRef} className="text-white mr-4 w-8 cursor-pointer" />
+
+      {/* Paperclip Icon with Tooltip */}
+      <Paperclip ref={paperclipRef} className="text-white w-8 cursor-pointer" />
+                  <input
+                    type="text"
+                    placeholder="Type your message..."
+                    className="bg-[#151A1D] w-full outline-none px-4 caret-white text-white"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+                  />
+
+                  <Navigation
+                    className="text-white ml-4 w-8 cursor-pointer"
+                    onClick={sendMessage}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -363,8 +480,8 @@ export default function Contact() {
               <p
                 className={` text-[#ddd] w-[250px] ${
                   section === 3 ? "ml-96 lg:ml-0" : " lg:ml-0"
-                } ${section === 1 ? "ml-20 lg:ml-0" : "lg:ml-0"}  ${
-                  section === 2 ? "ml-3 lg:ml-0" : "lg:ml-0"
+                } ${section === 1 ? "ml-16 lg:ml-0" : "lg:ml-0"}  ${
+                  section === 2 ? "ml-6 lg:ml-0" : "lg:ml-0"
                 } lg:w-full text-center text-2xl`}
               >
                 Skip chatting, let’s meet in person!!
@@ -373,11 +490,11 @@ export default function Contact() {
             <div
               className={` ${
                 section === 2
-                  ? " flex gap-1 lg:translate-x-0 ml-[-120px] lg:ml-0 lg:w-[1200px] w-[350px] mt-2"
+                  ? " flex gap-1 lg:translate-x-0 ml-[-98px] lg:ml-0 lg:w-[1200px] w-[350px] mt-2"
                   : ""
               } ${
                 section === 1
-                  ? " flex gap-1 lg:translate-x-0 ml-4 lg:ml-0 lg:w-[1200px] w-[350px] mt-2"
+                  ? " flex gap-1 lg:translate-x-0 ml-5 lg:ml-0 lg:w-[1200px] w-[350px] mt-2"
                   : ""
               } ${
                 section === 3
@@ -432,106 +549,14 @@ export default function Contact() {
             <form onSubmit={sendEmail}>
               {section === 1 ? (
                 <div className="mx-4 lg:mx-0 max-w-full">
-                  <h3 className=" text-white my-4 text-2xl">
+                  <h3 className=" ml-4 lg:ml-0 text-white my-4 text-2xl">
                     Basic Information
                   </h3>
-                  <div>
-                    <div
-                      className={`inline-block relative mr-2 ${
-                        firstnameEmpty ? "mb-8 md:mb-2" : ""
-                      }`}
-                    >
-                      <label htmlFor="" className=" text-white">
-                        First name
-                      </label>
-                      <input
-                        required
-                        value={formData.first_name}
-                        onChange={handleChange}
-                        className={`block ${
-                          firstnameEmpty ? "border border-red-600" : ""
-                        } lg:w-[550px] w-[180px] h-8 mt-2 outline-none px-2 rounded-lg`}
-                        type="text"
-                        name="first_name"
-                        id=""
-                      />
-                      {firstnameEmpty ? (
-                        <span className=" absolute text-red-600">
-                          firstname must not be Empty
-                        </span>
-                      ) : null}
-                    </div>
-                    <div className="inline-block lg:translate-x-[34px] lg:ml-0 relative ">
-                      <label htmlFor="" className=" text-white">
-                        Last name
-                      </label>
-                      <input
-                        required
-                        value={formData.last_name}
-                        onChange={handleChange}
-                        className={`block ${
-                          lastnameEmpty ? "border border-red-600" : ""
-                        } lg:w-[615px] w-[180px] h-8 mt-2 outline-none px-2 rounded-lg`}
-                        type="text"
-                        name="last_name"
-                        id=""
-                      />
-                      {lastnameEmpty ? (
-                        <span className="absolute text-red-600">
-                          lastname must not be Empty
-                        </span>
-                      ) : null}
-                    </div>
-                    <div className=" my-4">
-                      <label htmlFor="" className=" text-white">
-                        Your e-mail address
-                      </label>
-                      <input
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
-                        className={` block lg:w-[1200px] w-full  h-8 mt-2 outline-none px-2 rounded-lg`}
-                        type="text"
-                        name="email"
-                        id=""
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="" className=" text-white">
-                        Your phone number
-                      </label>
-                      <input
-                        required
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className={` ${
-                          mobileEmpty ? "border border-red-600" : ""
-                        } block lg:w-[1200px] w-full  h-8 mt-2 outline-none px-2 rounded-lg`}
-                        type="text"
-                        name="phone"
-                        id=""
-                      />
-                      {mobileEmpty ? (
-                        <p className=" text-red-600">
-                          mobile must not be Empty
-                        </p>
-                      ) : null}
-                    </div>
-                  </div>
-                  <div
-                    onClick={() =>
-                      formData.first_name === "" ||
-                      formData.last_name === "" ||
-                      formData.email === "" ||
-                      formData.phone === ""
-                        ? showMessage(toastTopCenter, "error")
-                        : setSection(2)
-                    }
-                    className=" flex gap-2 items-center bg-primary rounded-3xl text-white py-2 px-4 w-fit mt-4 float-end cursor-pointer hover:shadow-xl duration-300"
-                  >
-                    Next Step
-                    <IoMdArrowForward />
-                  </div>
+                  <ContactForm
+                    formData={formData}
+                    setSection={setSection}
+                    handleChange={handleChange}
+                  />
                 </div>
               ) : section === 2 ? (
                 <div className=" lg:ml-0">
@@ -650,375 +675,35 @@ export default function Contact() {
                         formData.industry === "" ||
                         platformSelect.length === 0 ||
                         formData.project_description === ""
-                          ? showMessage(toastTopCenter, "error")
+                          ? Swal.fire({
+                              title: "all field is requierd",
+                              icon: "error",
+                              draggable: true,
+                            })
                           : setSection(3)
                       }
-                      className=" flex gap-2 items-center bg-primary rounded-3xl text-white py-2 px-4 w-fit mt-4 float-end cursor-pointer hover:shadow-xl duration-300"
+                      className=" flex gap-2 items-center bg-primary rounded-3xl text-white py-2 px-10 w-fit mt-4 float-end cursor-pointer hover:shadow-xl duration-300"
                     >
                       Next Step
                       <IoMdArrowForward />
                     </div>
                     <div
                       onClick={() => setSection(1)}
-                      className=" mr-8 flex gap-2 items-center bg-[#B8BBBD] rounded-3xl text-white py-2 px-8 w-fit mt-4 float-end cursor-pointer hover:shadow-xl duration-300"
+                      className=" mr-8 flex gap-2 items-center bg-[#B8BBBD] rounded-3xl text-white py-2 px-10 w-fit mt-4 float-end cursor-pointer hover:shadow-xl duration-300"
                     >
                       Back
                     </div>
                   </div>
                 </div>
               ) : section === 3 ? (
-                <div className=" lg:w-[1200px] w-full mt-4">
-                  <h3 className=" text-white ml-80 lg:ml-0 my-4 text-2xl">
-                    Meeting Details
-                  </h3>
-                  <div className=" text-white flex items-center translate-x-[300px] lg:translate-x-0 w-[400px] lg:w-full gap-4 ">
-                    <AlertCircle />
-                    <p>
-                      Confirmation of the meeting details will be sent through
-                      e-mail. Please Follow up your email. If a problem arises
-                      please contact us through our direct contact channels.
-                    </p>
-                  </div>
-                  <h3 className=" text-white ml-80 lg:ml-0 my-4 text-2xl">
-                    Location
-                  </h3>
-                  <div className=" bg-white lg:w-fit w-[400px] p-4 translate-x-[300px] lg:translate-x-0">
-                    <h3 className=" font-bold text-black text-2xl">Location</h3>
-                    <div>
-                      <div
-                        onClick={() =>
-                          setFormData({
-                            ...formData,
-                            location: "At ABS.AI Headquarters",
-                          })
-                        }
-                        className={`${
-                          formData.location === "At ABS.AI Headquarters"
-                            ? "bg-primary text-white"
-                            : ""
-                        }  cursor-pointer duration-200 border mb-2 mt-2 px-10 text-center py-2`}
-                      >
-                        At ABS.AI Headquarters
-                      </div>
-                      <div
-                        onClick={() =>
-                          setFormData({
-                            ...formData,
-                            location: "At your headquarters",
-                          })
-                        }
-                        className={`${
-                          formData.location === "At your headquarters"
-                            ? "bg-primary text-white"
-                            : ""
-                        }  cursor-pointer duration-200 border mb-2 px-10 text-center py-2`}
-                      >
-                        At your headquarters
-                      </div>
-                      <div
-                        onClick={() =>
-                          setFormData({
-                            ...formData,
-                            location: "Online Meeting",
-                          })
-                        }
-                        className={`${
-                          formData.location === "Online Meeting"
-                            ? "bg-primary text-white"
-                            : ""
-                        }  cursor-pointer duration-200 border mb-2 px-10 text-center py-2`}
-                      >
-                        Online Meeting
-                      </div>
-                    </div>
-                  </div>
-                  <h3 className=" text-white ml-80 lg:ml-0 my-4 text-2xl">
-                    Date and Time
-                  </h3>
-                  <div className=" flex flex-col lg:flex-row gap-8 w-[1000px]">
-                    <Calendar
-                      className="w-[400px] translate-x-[300px] lg:translate-x-0 "
-                      value={formData.date}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          date: e.value.toLocaleDateString("en-US"),
-                        })
-                      }
-                      inline
-                      showWeek
-                    />
-                    <div className=" bg-white lg:w-fit w-[400px] translate-x-[300px] lg:translate-x-0 p-4">
-                      <h3 className=" font-bold text-black text-2xl">
-                        Time Slots
-                      </h3>
-                      <div className=" flex gap-2 mt-2">
-                        <div
-                          onClick={() =>
-                            setFormData({ ...formData, time_slot: "30 min" })
-                          }
-                          className={`${
-                            formData.time_slot === "30 min"
-                              ? "bg-primary text-white"
-                              : ""
-                          }  cursor-pointer duration-200 border mb-2 px-10 text-center py-2`}
-                        >
-                          30 min
-                        </div>
-                        <div
-                          onClick={() =>
-                            setFormData({ ...formData, time_slot: "1 Hour" })
-                          }
-                          className={`${
-                            formData.time_slot === "1 Hour"
-                              ? "bg-primary text-white"
-                              : ""
-                          }  cursor-pointer duration-200 border mb-2 px-10 text-center py-2`}
-                        >
-                          1 Hour
-                        </div>
-                        <div
-                          onClick={() =>
-                            setFormData({ ...formData, time_slot: "1+ Hour" })
-                          }
-                          className={`${
-                            formData.time_slot === "1+ Hour"
-                              ? "bg-primary text-white"
-                              : ""
-                          }  cursor-pointer duration-200 border mb-2 px-10 text-center py-2`}
-                        >
-                          1+ Hour
-                        </div>
-                      </div>
-                      <h3 className=" font-bold  text-black my-3">
-                        Workhours Time Slots (PM)
-                      </h3>
-                      <div className=" flex flex-wrap gap-2">
-                        <div
-                          onClick={() =>
-                            setFormData({
-                              ...formData,
-                              work_hours_time_slot: "1:00",
-                            })
-                          }
-                          className={`${
-                            formData.work_hours_time_slot === "1:00"
-                              ? "bg-primary text-white"
-                              : ""
-                          }  cursor-pointer duration-200 border mb-2 px-10 text-center py-2`}
-                        >
-                          1:00
-                        </div>
-                        <div
-                          onClick={() =>
-                            setFormData({
-                              ...formData,
-                              work_hours_time_slot: "1:30",
-                            })
-                          }
-                          className={`${
-                            formData.work_hours_time_slot === "1:30"
-                              ? "bg-primary text-white"
-                              : ""
-                          }  cursor-pointer duration-200 border mb-2 px-10 text-center py-2`}
-                        >
-                          1:30
-                        </div>
-                        <div
-                          onClick={() =>
-                            setFormData({
-                              ...formData,
-                              work_hours_time_slot: "2:00",
-                            })
-                          }
-                          className={`${
-                            formData.work_hours_time_slot === "2:00"
-                              ? "bg-primary text-white"
-                              : ""
-                          }  cursor-pointer duration-200 border mb-2 px-10 text-center py-2`}
-                        >
-                          2:00
-                        </div>
-                        <div
-                          onClick={() =>
-                            setFormData({
-                              ...formData,
-                              work_hours_time_slot: "2:30",
-                            })
-                          }
-                          className={`${
-                            formData.work_hours_time_slot === "2:30"
-                              ? "bg-primary text-white"
-                              : ""
-                          }  cursor-pointer duration-200 border mb-2 px-10 text-center py-2`}
-                        >
-                          2:30
-                        </div>
-                        <div
-                          onClick={() =>
-                            setFormData({
-                              ...formData,
-                              work_hours_time_slot: "3:00",
-                            })
-                          }
-                          className={`${
-                            formData.work_hours_time_slot === "3:00"
-                              ? "bg-primary text-white"
-                              : ""
-                          }  cursor-pointer duration-200 border mb-2 px-10 text-center py-2`}
-                        >
-                          3:00
-                        </div>
-                        <div
-                          onClick={() =>
-                            setFormData({
-                              ...formData,
-                              work_hours_time_slot: "3:30",
-                            })
-                          }
-                          className={`${
-                            formData.work_hours_time_slot === "3:30"
-                              ? "bg-primary text-white"
-                              : ""
-                          }  cursor-pointer duration-200 border mb-2 px-10 text-center py-2`}
-                        >
-                          3:30
-                        </div>
-                        <div
-                          onClick={() =>
-                            setFormData({
-                              ...formData,
-                              work_hours_time_slot: "4:00",
-                            })
-                          }
-                          className={`${
-                            formData.work_hours_time_slot === "4:00"
-                              ? "bg-primary text-white"
-                              : ""
-                          }  cursor-pointer duration-200 border mb-2 px-10 text-center py-2`}
-                        >
-                          4:00
-                        </div>
-                      </div>
-                      <p className=" text-black font-bold">
-                        Post-workhours Time Slots (PM)
-                      </p>
-                      <div className=" flex flex-wrap gap-2">
-                        <div
-                          onClick={() =>
-                            setFormData({
-                              ...formData,
-                              work_hours_time_slot: "7:30",
-                            })
-                          }
-                          className={`${
-                            formData.work_hours_time_slot === "7:30"
-                              ? "bg-primary text-white"
-                              : ""
-                          }  cursor-pointer duration-200 border mb-2 px-10 text-center py-2`}
-                        >
-                          7:30
-                        </div>
-                        <div
-                          onClick={() =>
-                            setFormData({
-                              ...formData,
-                              work_hours_time_slot: "8:00",
-                            })
-                          }
-                          className={`${
-                            formData.work_hours_time_slot === "8:00"
-                              ? "bg-primary text-white"
-                              : ""
-                          }  cursor-pointer duration-200 border mb-2 px-10 text-center py-2`}
-                        >
-                          8:00
-                        </div>
-                        <div
-                          onClick={() =>
-                            setFormData({
-                              ...formData,
-                              work_hours_time_slot: "8:30",
-                            })
-                          }
-                          className={`${
-                            formData.work_hours_time_slot === "8:30"
-                              ? "bg-primary text-white"
-                              : ""
-                          }  cursor-pointer duration-200 border mb-2 px-10 text-center py-2`}
-                        >
-                          8:30
-                        </div>
-                        <div
-                          onClick={() =>
-                            setFormData({
-                              ...formData,
-                              work_hours_time_slot: "9:00",
-                            })
-                          }
-                          className={`${
-                            formData.work_hours_time_slot === "9:00"
-                              ? "bg-primary text-white"
-                              : ""
-                          }  cursor-pointer duration-200 border mb-2 px-10 text-center py-2`}
-                        >
-                          9:00
-                        </div>
-                        <div
-                          onClick={() =>
-                            setFormData({
-                              ...formData,
-                              work_hours_time_slot: "9:30",
-                            })
-                          }
-                          className={`${
-                            formData.work_hours_time_slot === "9:30"
-                              ? "bg-primary text-white"
-                              : ""
-                          }  cursor-pointer duration-200 border mb-2 px-10 text-center py-2`}
-                        >
-                          9:30
-                        </div>
-                        <div
-                          onClick={() =>
-                            setFormData({
-                              ...formData,
-                              work_hours_time_slot: "10:00",
-                            })
-                          }
-                          className={`${
-                            formData.work_hours_time_slot === "10:00"
-                              ? "bg-primary text-white"
-                              : ""
-                          }  cursor-pointer duration-200 border mb-2 px-10 text-center py-2`}
-                        >
-                          10:00
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className=" flex justify-center items-center lg:justify-end lg:items-end">
-                    <div
-                      onClick={() => setSection(2)}
-                      className=" mr-8 flex gap-2 items-center bg-[#B8BBBD] rounded-3xl text-white py-2 px-8 w-fit mt-4 float-end cursor-pointer hover:shadow-xl duration-300"
-                    >
-                      Back
-                    </div>
-                    <button
-                      onClick={() =>
-                        formData.location === "" ||
-                        formData.time_slot === "" ||
-                        formData.date === ""
-                          ? showMessage(toastTopCenter, "error")
-                          : sendEmail()
-                      }
-                      className=" flex gap-2 items-center bg-primary rounded-3xl text-white py-2 px-4 w-fit mt-4 float-end cursor-pointer hover:shadow-xl duration-300"
-                    >
-                      Send request
-                      <IoMdArrowForward />
-                    </button>
-                  </div>
-                </div>
+                <MeetingScheduler
+                  formData={formData}
+                  setFormData={setFormData}
+                  date={date}
+                  setDate={setDate}
+                  setSection={setSection}
+                  sendEmail={sendEmail}
+                />
               ) : null}
             </form>
           </div>

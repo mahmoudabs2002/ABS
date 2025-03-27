@@ -88,12 +88,15 @@ console.log(data)
         createdAt: new Date(),
       });
       setImage(""); // Clear input field after adding
+      setVisible(false)
                 Swal.fire({
                   title: "data added successfully",
                   icon: "success",
                   draggable: true,
                 });
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
       console.error("Error adding document: ", error);
     }
@@ -114,20 +117,20 @@ console.log(data)
   };
   return (
     <div className=" relative ">
-      <div className=" px-20 bg-[url('/worked_with_background_image.png')] bg-center bg-cover bg-no-repeat">
+      <div className=" lg:px-40 px-5 bg-[url('/worked_with_background_image.png')] bg-center bg-cover bg-no-repeat">
         <h3 className=" py-10  text-center text-primary font-bold text-[32px]">We worked for</h3>
-        <div className="flex justify-center py-10 flex-wrap items-center">
+        <div className="flex justify-center py-10 gap-0 flex-wrap items-center">
            {
             data.map((e)=> {
               return (
                 <div key={e?.id} className=" relative">
-                                       <button
+                       <button
                         className={` absolute top-0 ${location.pathname === "/admin/home/add/items" ? " flex" : " hidden"}   left-2  z-[400] hover:bg-red-700 bg-red-600 mt-2 text-white rounded-3xl px-2 py-2`}
                         onClick={() => deleteDocument("work", e.id)}
                       >
                         X
                       </button>
-                   <img src={e?.image} alt="" className="lg:w-36 lg:mx-16 mx-2 my-2" />
+                   <img src={e?.image} alt="" className="lg:w-[180px] max-w-[120px] min-w-[120px] object-contain  lg:mx-4 mx-2 my-2" />
                 </div>
               )
             } )
